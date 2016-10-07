@@ -6,7 +6,7 @@ package dw317.lib.creditcard;
 import static java.lang.System.out;
 
 /**
- * @author Sebastian nop kajal
+ * @author Sebastian nop kajal another cxhange
  *
  */
 public class AmexTest{
