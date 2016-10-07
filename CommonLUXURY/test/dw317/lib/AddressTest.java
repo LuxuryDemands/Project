@@ -2,13 +2,17 @@ package dw317.lib;
 
 import static java.lang.System.out;
 
+import java.util.Optional;
+
 public class AddressTest {
 
 	public static void main(String[] args) {
-		//testTheThreeParameterConstructor();
-//		Address a1 = new Address("3045","Sherbrooke","Montreal",Optional.of(""),Optional.of(""));
-//		Person p1 = new Person("juan","sebastian",a1);
-//		System.out.println(p1.getAddress());
+		testTheThreeParameterConstructor();
+		Address a1 = new Address("3045","Sherbrooke","Montreal",Optional.of(""),Optional.of(""));
+		Person p1 = new Person("juan","sebastian",a1);
+		System.out.println(p1.getAddress());
+		
+		
 	}
 
 	public static void testTheThreeParameterConstructor() {
