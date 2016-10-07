@@ -31,6 +31,6 @@ public class HotelFileLoaderTest {
 		for (int i = 0; i < customerArrayTest.length; i++) {
 			System.out.println(customerArrayTest[i].equals(customerArrayTest[i]));
 		}
-		Arrays.sort(customerArrayTest, customer);
+		Arrays.sort(customerArrayTest, customer);jbgj
 	}
 }
