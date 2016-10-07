@@ -32,11 +32,6 @@ public class DawsonHotelFactoryTest {
 		System.out.println(c1.equals(c2));
 		System.out.println(c3.toString());
 		System.out.println(r1.toString());
-		System.out.println(rv1.toString());
-		System.out.println("test");
-		System.out.println("asdas");
-		System.out.println("asd");
-		
+		System.out.println(rv1.toString());	
 	}
-
 }
