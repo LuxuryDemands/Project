@@ -13,7 +13,7 @@ import dw317.lib.creditcard.CreditCard;
  * @author 1331680
  *
  */
-public class DawsonHotelFactoryTestt {
+public class DawsonHotelFactoryTest {
 
 	/**
 	 * @param args
