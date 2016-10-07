@@ -132,7 +132,7 @@ public class Email implements Serializable, Comparable<Email> {
 	 * @return String Returns the emailAddress
 	 */
 	
-	private String validateEmail(String emailAddress) {
+	private static String validateEmail(String emailAddress) {
 		if (emailAddress.indexOf('@')==-1){
 			throw new IllegalArgumentException("Invalid Email");
 		}
@@ -156,7 +156,7 @@ public class Email implements Serializable, Comparable<Email> {
 	 */
 	
 	
-	private boolean validateUserID(String userID) {
+	private static boolean validateUserID(String userID) {
 		if (userID.length() < 1 || userID.length() > 32) {
 			return false;
 		} else if (userID.startsWith(".") || userID.endsWith(".")) {
@@ -180,7 +180,7 @@ public class Email implements Serializable, Comparable<Email> {
 	 */
 	
 
-	private boolean validateHostName(String hostName) {
+	private static boolean validateHostName(String hostName) {
 		if (hostName.startsWith(".") || hostName.endsWith(".") || hostName.startsWith("-")) {
 			return false;
 		} else if (hostName.contains("..")) {
