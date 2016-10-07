@@ -35,6 +35,7 @@ public class DawsonHotelFactoryTest {
 		System.out.println(rv1.toString());
 		System.out.println("test");
 		System.out.println("asdas");
+		System.out.println("asd");
 		
 	}
 
