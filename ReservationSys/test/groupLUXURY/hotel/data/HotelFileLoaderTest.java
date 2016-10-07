@@ -23,14 +23,21 @@ public class HotelFileLoaderTest {
 	public static void main(String[] args) throws IOException {
 		Room[] roomArrayTest = HotelFileLoader.getRoomListFromSequentialFile(
 				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\rooms.txt");
+//		for (int i = 0; i < roomArrayTest.length; i++) {
+//			System.out.println(roomArrayTest[i]);
+//		}
+		Customer[] customerArrayTest = HotelFileLoader.getCustomerListFromSequentialFile(
+				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers6.txt");
+//		for (int i = 0; i < customerArrayTest.length; i++) {
+////			System.out.println(customerArrayTest[i].equals(customerArrayTest[i]));
+////		}
+		Arrays.sort(roomArrayTest, null);
 		for (int i = 0; i < roomArrayTest.length; i++) {
 			System.out.println(roomArrayTest[i]);
 		}
-		Customer[] customerArrayTest = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers6.txt");
+		Arrays.sort(customerArrayTest);
 		for (int i = 0; i < customerArrayTest.length; i++) {
-			System.out.println(customerArrayTest[i].equals(customerArrayTest[i]));
+			System.out.println(customerArrayTest[i]);
 		}
-		Arrays.sort(customerArrayTest, customer);jbgj
 	}
 }
