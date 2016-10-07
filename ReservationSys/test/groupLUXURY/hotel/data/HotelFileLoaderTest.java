@@ -5,6 +5,7 @@ package groupLUXURY.hotel.data;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Room;
@@ -30,6 +31,6 @@ public class HotelFileLoaderTest {
 		for (int i = 0; i < customerArrayTest.length; i++) {
 			System.out.println(customerArrayTest[i].equals(customerArrayTest[i]));
 		}
-		
+		Arrays.sort(customerArrayTest, customer);
 	}
 }
