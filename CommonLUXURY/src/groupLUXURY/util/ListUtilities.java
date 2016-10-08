@@ -3,6 +3,7 @@
  */
 package groupLUXURY.util;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -38,8 +39,22 @@ public class ListUtilities {
             list[i] = smallest;
         }
     }
-	
-	public static void merge(Comparable[] list1, Comparable list2){
-		
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static Comparable[] merge(Comparable[] list1, Comparable[] list2, String duplicateFileName){
+		Comparable[] list3 = (Comparable[]) Array.newInstance(
+				list1.getClass().getComponentType(), list1.length + list2.length);
+		for(int i=0; i<list1.length+list2.length;i++){
+			if (list1[i].compareTo(list2[i])==0){
+				if (count(list1[i].toString())>count(list2[i].toString())){
+					list3[i] = list1[i];
+					list3[i++] = list2[i];
+				}
+				
+			}
+		}
+	}
+	private static int count(String item){
+		return item.split("[*]").length;
+
 	}
 }
