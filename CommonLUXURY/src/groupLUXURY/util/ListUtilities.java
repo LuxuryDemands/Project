@@ -42,12 +42,12 @@ public class ListUtilities {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static Comparable[] merge(Comparable[] list1, Comparable[] list2, String duplicateFileName) {
+	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) {
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				list1.length + list2.length);
 		int i = 0;
 		int j = 0;
-		while (i < list3.length) {
+		while (i < list1.length) {
 			if (list1[i].compareTo(list2[i]) < 0) {
 				list3[j] = list1[i];
 				j++;
