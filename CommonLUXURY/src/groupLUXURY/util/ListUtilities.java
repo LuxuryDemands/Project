@@ -43,6 +43,12 @@ public class ListUtilities {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) {
+		if (list1==null || list2 == null){
+			throw new NullPointerException("Neither of the lists can be null");
+		}
+		if (checkNull(list1) || checkNull(list2)){
+			throw new IllegalArgumentException("One of the lists is not full to capacity");
+		}
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				list1.length + list2.length);
 		int i = 0;
@@ -72,11 +78,22 @@ public class ListUtilities {
 				}
 			}
 		}
-		return list3;
+		sort(list3);
+		Comparable [] listToReturn = list3;
+		return listToReturn;
 	}
 
 	private static int count(String item) {
 		return item.split("[*]").length;
 
+	}
+	@SuppressWarnings("rawtypes")
+	private static boolean checkNull(Comparable[] list){
+		for (int i = 0; i<list.length; i++){
+			if (list[i] == null){
+				return true;
+			}
+		}
+		return false;
 	}
 }
