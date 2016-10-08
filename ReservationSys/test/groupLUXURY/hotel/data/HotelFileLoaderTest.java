@@ -27,11 +27,22 @@ public class HotelFileLoaderTest {
 		// for (int i = 0; i < roomArrayTest.length; i++) {
 		// System.out.println(roomArrayTest[i]);
 		// }
-		Customer[] customerArrayTest = HotelFileLoader.getCustomerListFromSequentialFile(
+		Customer[] customerArrayTest1 = HotelFileLoader.getCustomerListFromSequentialFile(
 				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers6.txt");
-		ListUtilities.sort(customerArrayTest);
-		for (int i = 0; i < customerArrayTest.length; i++) {
-			System.out.println(customerArrayTest[i]);
+		Customer[] customerArrayTest2 = HotelFileLoader.getCustomerListFromSequentialFile(
+				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers1.txt");
+		Customer[] customerArrayTest3 = HotelFileLoader.getCustomerListFromSequentialFile(
+				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers2.txt");
+		ListUtilities.sort(customerArrayTest1);
+		ListUtilities.sort(customerArrayTest2);
+		ListUtilities.sort(customerArrayTest3);
+//		for (int i = 0; i < customerArrayTest1.length; i++) {
+//			System.out.println(customerArrayTest1[i]);
+//		}
+		@SuppressWarnings("rawtypes")
+		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
+		for (int i = 0; i<mergeList.length;i++){
+			System.out.println(mergeList[i]);
 		}
 	}
 }
