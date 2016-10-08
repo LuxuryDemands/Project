@@ -38,4 +38,8 @@ public class ListUtilities {
             list[i] = smallest;
         }
     }
+	
+	public static void merge(Comparable[] list1, Comparable list2){
+		
+	}
 }
