@@ -17,9 +17,8 @@ public class ListUtilities {
         {
             int index = i;
             for (int j = i + 1; j < list.length; j++)
-                if (list[j].compareTo(list[index])>0) 
+                if (list[j].compareTo(list[index])<0) 
                     index = j;
-      
             Comparable smallest = list[index];  
             list[index] = list[i];
             list[i] = smallest;
