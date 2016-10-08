@@ -40,7 +40,7 @@ public class HotelFileLoaderTest {
 //			System.out.println(customerArrayTest1[i]);
 //		}
 		@SuppressWarnings("rawtypes")
-		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
+		Comparable[] mergeList = ListUtilities.merge(customerArrayTest2,customerArrayTest3);
 		for (int i = 0; i<mergeList.length;i++){
 			System.out.println(mergeList[i]);
 		}
