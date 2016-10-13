@@ -54,29 +54,11 @@ public class ListUtilities {
 		int i = 0;
 		int j = 0;
 		while (i < list1.length) {
-			if (list1[i].compareTo(list2[i]) < 0) {
 				list3[j] = list1[i];
 				j++;
 				list3[j] = list2[i];
 				j++;
 				i++;
-			} else if (list1[i].compareTo(list2[i]) > 0) {
-				list3[j] = list2[i];
-				j++;
-				list3[j] = list1[i];
-				j++;
-				i++;
-			} else {
-				if (count(list1[i].toString()) > count(list2[i].toString())) {
-					list3[j] = list1[i];
-					j++;
-					i++;
-				} else {
-					list3[j] = list2[i];
-					j++;
-					i++;
-				}
-			}
 		}
 		sort(list3);
 		Comparable [] listToReturn = list3;
@@ -95,5 +77,18 @@ public class ListUtilities {
 			}
 		}
 		return false;
+	}
+	
+	public static int countDuplicates(Comparable[] list){
+		int count = 0;
+		for (int i =0;i<list.length;i++){
+			if (i==list.length-1){
+				break;
+			}
+			if (list[i].equals(list[i+1])){
+				count++;
+			}
+		}
+		return count;
 	}
 }

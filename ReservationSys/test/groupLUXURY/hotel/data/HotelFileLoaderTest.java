@@ -22,25 +22,23 @@ public class HotelFileLoaderTest {
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws IOException {
-		Room[] roomArrayTest = HotelFileLoader.getRoomListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\rooms.txt");
+//		Room[] roomArrayTest = HotelFileLoader.getRoomListFromSequentialFile(
+//				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\rooms.txt");
 		// for (int i = 0; i < roomArrayTest.length; i++) {
 		// System.out.println(roomArrayTest[i]);
 		// }
 		Customer[] customerArrayTest1 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers6.txt");
+				"C:\\Users\\1331680\\Desktop\\datafiles\\customers1.txt");
 		Customer[] customerArrayTest2 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers1.txt");
-		Customer[] customerArrayTest3 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Eclipse\\ReservationSys\\datafiles\\customers2.txt");
-		ListUtilities.sort(customerArrayTest1);
-		ListUtilities.sort(customerArrayTest2);
-		ListUtilities.sort(customerArrayTest3);
+				"C:\\Users\\1331680\\Desktop\\datafiles\\customers2.txt");
+//		ListUtilities.sort(customerArrayTest1);
+//		ListUtilities.sort(customerArrayTest2);
 //		for (int i = 0; i < customerArrayTest1.length; i++) {
 //			System.out.println(customerArrayTest1[i]);
 //		}
 		@SuppressWarnings("rawtypes")
-		Comparable[] mergeList = ListUtilities.merge(customerArrayTest2,customerArrayTest3);
+		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
+		System.out.println(ListUtilities.countDuplicates(mergeList));
 		for (int i = 0; i<mergeList.length;i++){
 			System.out.println(mergeList[i]);
 		}
