@@ -61,6 +61,9 @@ public class ListUtilities {
 				i++;
 		}
 		sort(list3);
+//		Comparable[] list3copy = Arrays.copyOf(list3, list3.length);
+//		Comparable
+		
 		Comparable [] listToReturn = list3;
 		return listToReturn;
 	}
