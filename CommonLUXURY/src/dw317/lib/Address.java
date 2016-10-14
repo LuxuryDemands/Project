@@ -18,7 +18,7 @@ public class Address {
 	private String streetName;
 	private String province = "";
 	private String code = "";
-
+	private int num=6;
 	/**
 	 * Address default constructor with no params: does nothing.
 	 * Simply overrides the java default constructor with no params.
