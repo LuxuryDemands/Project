@@ -40,9 +40,15 @@ public class HotelFileLoaderTest {
 		for (int i = 0; i < customerArrayTest1.length; i++) {
 			System.out.println(customerArrayTest1[i]);
 		}
+		System.out.println("second list jnow");
+		for (int i = 0; i < customerArrayTest2.length; i++) {
+			System.out.println(customerArrayTest1[i]);
+		}
 		@SuppressWarnings("rawtypes")
 		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
 		System.out.println(ListUtilities.countDuplicates(mergeList));
+		
+		System.out.println("now sorted");
 		for (int i = 0; i<mergeList.length;i++){
 			System.out.println(mergeList[i]);
 		}
