@@ -17,8 +17,16 @@ public class Address {
 	private String civicNumber;
 	private String streetName;
 	private String province = "";
+<<<<<<< HEAD
 	private String code = "";
 	private double num;
+=======
+	private String code = "";
+	private int num;
+
+
+
+>>>>>>> branch 'master' of https://github.com/LuxuryDemands/Project
 	/**
 	 * Address default constructor with no params: does nothing.
 	 * Simply overrides the java default constructor with no params.
