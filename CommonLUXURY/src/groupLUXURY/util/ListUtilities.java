@@ -49,7 +49,10 @@ public class ListUtilities {
 		if (checkNull(list1) || checkNull(list2)){
 			throw new IllegalArgumentException("One of the lists is not full to capacity");
 		}
-		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
+		
+		/*
+		 * Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
+		 
 				list1.length + list2.length);
 		int i = 0;
 		int j = 0;
@@ -61,10 +64,61 @@ public class ListUtilities {
 				i++;
 		}
 		sort(list3);
+<<<<<<< HEAD
 //		Comparable[] list3copy = Arrays.copyOf(list3, list3.length);
 //		Comparable
 		
 		Comparable [] listToReturn = list3;
+=======
+		*/
+		
+		
+		
+		
+		
+		//*
+		//*isaak
+		//*
+		//*
+		int p=0;
+		int q=0;
+		int r=0;
+//
+		//make new array 
+		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
+				list1.length + list2.length);
+		
+		while (p<list1.length && q<list2.length)
+		{
+			if (list1[p].compareTo(list2[q]) == 0 ) // if same
+			{
+				//save p
+				list3[r++] = list1[p];
+				p++;
+				q++;
+			}
+			else if (list1[p].compareTo(list2[q]) < 0 ) //p is smaller
+			{
+				//save p
+				list3[r++] = list1[p];
+				p++;
+			}
+			else if (list1[p].compareTo(list2[q]) > 0 ) //q is smaller
+			{
+				//save q
+				list3[r++] = list2[q];
+				q++;
+			}
+		}
+		
+		//shrink array by using the total counter r
+		Comparable[] listToReturn = Arrays.copyOf(list3, r+1);
+			
+
+		
+		
+		//Comparable [] listToReturn = list3;
+>>>>>>> branch 'master' of https://github.com/LuxuryDemands/Project.git
 		return listToReturn;
 	}
 
