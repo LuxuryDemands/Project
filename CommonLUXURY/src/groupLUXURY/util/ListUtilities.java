@@ -61,10 +61,10 @@ public class ListUtilities {
 			i1++;
 		}
 		sort(list3);
-		for (int index = 0; index < list3.length; index++) {
+		for (int index = 0; index<list3.length; index++){
 			System.out.println(list3[index]);
 		}
-		System.out.println("=======SEPARATOR=======");
+		System.out.println("++++++++++++");
 		Comparable[] duplicates = arrayDuplicates(list3);
 		Comparable[] list4 = (Comparable[]) Array.newInstance(list3.getClass().getComponentType(),
 				list3.length - duplicates.length);
@@ -78,7 +78,6 @@ public class ListUtilities {
 				}
 			}
 		}
-		// }
 		Comparable[] listToReturn = list4;
 		return listToReturn;
 	}
