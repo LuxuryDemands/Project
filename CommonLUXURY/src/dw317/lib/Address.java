@@ -18,6 +18,7 @@ public class Address {
 	private String streetName;
 	private String province = "";
 	private String code ="";
+	private String yooo = "";
 	
 	/**
 	 * Address default constructor with no params: does nothing.
