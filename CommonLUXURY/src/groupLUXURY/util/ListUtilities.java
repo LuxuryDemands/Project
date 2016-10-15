@@ -61,9 +61,6 @@ public class ListUtilities {
 			i1++;
 		}
 		sort(list3);
-		for (int index = 0; index<list3.length; index++){
-			System.out.println(list3[index]);
-		}
 		System.out.println("++++++++++++");
 		Comparable[] duplicates = arrayDuplicates(list3);
 		Comparable[] list4 = (Comparable[]) Array.newInstance(list3.getClass().getComponentType(),
@@ -82,43 +79,6 @@ public class ListUtilities {
 		return listToReturn;
 	}
 
-	// isaak code vvvvv
-	// int p=0;
-	// int q=0;
-	// int r=0;
-	//
-	// make new array
-	// Comparable[] list3 = (Comparable[])
-	// Array.newInstance(list1.getClass().getComponentType(),
-	// list1.length + list2.length);
-
-	// while (p<list1.length && q<list2.length)
-	// {
-	// if (list1[p].compareTo(list2[q]) == 0 ) // if same
-	// {
-	// //save p
-	// list3[r++] = list1[p];
-	// p++;
-	// q++;
-	// System.out.println("duplicate found:" + list3[r]);
-	// }
-	// else if (list1[p].compareTo(list2[q]) < 0 ) //p is smaller
-	// {
-	// //save p
-	// list3[r++] = list1[p];
-	// p++;
-	// }
-	// else if (list1[p].compareTo(list2[q]) > 0 ) //q is smaller
-	// {
-	// //save q
-	// list3[r++] = list2[q];
-	// q++;
-	// }
-	// }
-	//
-	// //shrink array by using the total counter r
-	// Comparable[] listToReturn = Arrays.copyOf(list3, r);
-	// end isaak code^^^
 
 	private static int count(String item) {
 		return item.split("[*]").length;
@@ -165,4 +125,42 @@ public class ListUtilities {
 		}
 		return duplicateList;
 	}
+
+	// isaak code vvvvv
+	// int p=0;
+	// int q=0;
+	// int r=0;
+	//
+	// make new array
+	// Comparable[] list3 = (Comparable[])
+	// Array.newInstance(list1.getClass().getComponentType(),
+	// list1.length + list2.length);
+
+	// while (p<list1.length && q<list2.length)
+	// {
+	// if (list1[p].compareTo(list2[q]) == 0 ) // if same
+	// {
+	// //save p
+	// list3[r++] = list1[p];
+	// p++;
+	// q++;
+	// System.out.println("duplicate found:" + list3[r]);
+	// }
+	// else if (list1[p].compareTo(list2[q]) < 0 ) //p is smaller
+	// {
+	// //save p
+	// list3[r++] = list1[p];
+	// p++;
+	// }
+	// else if (list1[p].compareTo(list2[q]) > 0 ) //q is smaller
+	// {
+	// //save q
+	// list3[r++] = list2[q];
+	// q++;
+	// }
+	// }
+	//
+	// //shrink array by using the total counter r
+	// Comparable[] listToReturn = Arrays.copyOf(list3, r);
+	// end isaak code^^^
 }
