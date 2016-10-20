@@ -86,6 +86,8 @@ public class ListUtilities {
 			list3[i] = list2[j];
 		}
 		sort(list3);
+		System.out.println("++++++++++++");
+
 		Comparable[] duplicates = arrayDuplicates(list3);
 		Comparable[] list4 = (Comparable[]) Array.newInstance(list3.getClass().getComponentType(),
 				list3.length - duplicates.length);
@@ -111,7 +113,6 @@ public class ListUtilities {
 			listToReturn = list3;
 			return listToReturn;
 		}
-
 	}
 
 	@SuppressWarnings("rawtypes")
