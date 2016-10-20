@@ -59,9 +59,6 @@ public class HotelFileLoader {
 		customerListScanner.close();
 		return customerListArray;
 	}
-	//public static Reservation[] getReservationListFromSequentialFile  (String filename,  Customer[] customerList,  Room[] roomList) throws IOException, IllegalArgumentException{
-		
-	//}
 
 	private static String getRoomNumber(String roomString) {
 		return roomString.substring(0, roomString.indexOf('*'));

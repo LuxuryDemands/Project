@@ -23,7 +23,7 @@ public class HotelFileLoaderTest {
 	 */
 	public static void main(String[] args) throws IOException {
 		Room[] roomArrayTest = HotelFileLoader.getRoomListFromSequentialFile(
-				"C:\\Users\\1331680\\Desktop\\unsorted\\rooms.txt");
+				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\rooms.txt");
 //		 for (int i = 0; i < roomArrayTest.length; i++) {
 //		System.out.println(roomArrayTest[i]);
 //	 }
@@ -32,9 +32,9 @@ public class HotelFileLoaderTest {
 //				System.out.println(roomArrayTest[i]);
 //			 }
 		Customer[] customerArrayTest1 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\1331680\\Desktop\\unsorted\\customers1.txt");
+				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\customers1.txt");
 		Customer[] customerArrayTest2 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\1331680\\Desktop\\unsorted\\customers2.txt");
+				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\customers2.txt");
 		ListUtilities.sort(customerArrayTest1);
 		ListUtilities.sort(customerArrayTest2);
 //		for (int i = 0; i < customerArrayTest1.length; i++) {
