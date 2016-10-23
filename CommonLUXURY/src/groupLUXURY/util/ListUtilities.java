@@ -6,10 +6,8 @@ package groupLUXURY.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * @author Sebastian
@@ -21,36 +19,6 @@ public class ListUtilities {
 
 	}
 
-	/**
-	 * Sorts a list of objects in ascending natural order using * selection
-	 * sort.
-	 *
-	 * Precondition: Assumes that the list is not null and that the list's
-	 * capacity is equal to the list's size.
-	 *
-	 *
-	 * @param list
-	 *            A list of objects. Assumes that the list's capacity is equal
-	 *            to the list's size.
-	 *
-	 * @throws IllegalArgumentException
-	 *             if the parameter is * not full to capacity.
-	 *
-	 * @throws NullPointerException
-	 *             if the list is null.
-	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static void sort(Comparable[] list) throws IllegalArgumentException, NullPointerException {
-		for (int i = 0; i < list.length - 1; i++) {
-			int index = i;
-			for (int j = i + 1; j < list.length; j++)
-				if (list[j].compareTo(list[index]) < 0)
-					index = j;
-			Comparable smallest = list[index];
-			list[index] = list[i];
-			list[i] = smallest;
-		}
-	}
 	/**
 	 * Efficiently merges two sorted lists of objects in ascending natural
 	 * order. If the duplicate objects are in both lists, the object from list1
@@ -93,6 +61,7 @@ public class ListUtilities {
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
 		ArrayList<String> duplicates = duplicatesList(list1, list2);
+		saveListToTextFile(duplicates);
 		for (int i = 0, j = 0; i < list3.length; i++, j++) {
 			list3[i] = list1[j];
 			i++;
@@ -105,6 +74,46 @@ public class ListUtilities {
 		sort(list3);
 		return list3;
 	}
+	public static <E> void saveListToTextFile(ArrayList<E> list) throws FileNotFoundException{
+		File file = new File("C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\duplicates.txt");
+		PrintWriter print = new PrintWriter(file);
+		for (int i=0;i<list.size();i++){
+			print.println(list.get(i));
+		}
+		print.close();
+	}
+	 
+	/**
+	 * Sorts a list of objects in ascending natural order using * selection
+	 * sort.
+	 *
+	 * Precondition: Assumes that the list is not null and that the list's
+	 * capacity is equal to the list's size.
+	 *
+	 *
+	 * @param list
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 *
+	 * @throws IllegalArgumentException
+	 *             if the parameter is * not full to capacity.
+	 *
+	 * @throws NullPointerException
+	 *             if the list is null.
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void sort(Comparable[] list) throws IllegalArgumentException, NullPointerException {
+		for (int i = 0; i < list.length - 1; i++) {
+			int index = i;
+			for (int j = i + 1; j < list.length; j++)
+				if (list[j].compareTo(list[index]) < 0)
+					index = j;
+			Comparable smallest = list[index];
+			list[index] = list[i];
+			list[i] = smallest;
+		}
+	}
+	
 
 	@SuppressWarnings("rawtypes")
 	private static ArrayList<String> duplicatesList(Comparable[] list1, Comparable[] list2) {
@@ -112,7 +121,7 @@ public class ListUtilities {
 		for (int i = 0; i < list1.length; i++) {
 			for (int j = 0; j < list2.length; j++) {
 				if (list1[i].equals(list2[j])) {
-					hold.add(list1[i].toString()+"(merged)");
+					hold.add(list1[i].toString() + "(merged)");
 					hold.add(list2[j].toString());
 					list2[j] = null;
 				}
@@ -132,7 +141,7 @@ public class ListUtilities {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static int countDuplicates(Comparable[] list1, Comparable[] list2) {
+	private static int countDuplicates(Comparable[] list1, Comparable[] list2) {
 		int count = 0;
 		for (int i = 0; i < list1.length; i++) {
 			for (int j = 0; j < list2.length; j++) {
@@ -142,36 +151,5 @@ public class ListUtilities {
 			}
 		}
 		return count;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public static int countDuplicates(Comparable[] list) {
-		int count = 0;
-		for (int i = 0; i < list.length; i++) {
-			if (i == list.length - 1) {
-				break;
-			}
-			if (list[i].equals(list[i + 1])) {
-				count++;
-			}
-		}
-		return count;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public static Comparable[] arrayDuplicates(Comparable[] list) {
-		Comparable[] duplicateList = (Comparable[]) Array.newInstance(list.getClass().getComponentType(),
-				countDuplicates(list));
-		int count = 0;
-		for (int i = 0; i < list.length; i++) {
-			if (i == list.length - 1) {
-				break;
-			}
-			if (list[i].equals(list[i + 1])) {
-				duplicateList[count] = list[i + 1];
-				count++;
-			}
-		}
-		return duplicateList;
 	}
 }

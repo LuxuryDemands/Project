@@ -40,7 +40,6 @@ public class HotelFileLoaderTest {
 				"C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\unsorted\\customers2.txt");
 		ListUtilities.sort(customerArrayTest1);
 		ListUtilities.sort(customerArrayTest2);
-		ListUtilities.countDuplicates(customerArrayTest1,customerArrayTest2);
 		@SuppressWarnings("rawtypes")
 		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
 		for (int i = 0; i<mergeList.length;i++){
