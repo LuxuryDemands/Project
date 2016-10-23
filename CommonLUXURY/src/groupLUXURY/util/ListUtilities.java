@@ -6,7 +6,9 @@ package groupLUXURY.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,7 +17,11 @@ import java.util.Scanner;
  */
 public class ListUtilities {
 
-	/*
+	private ListUtilities() {
+
+	}
+
+	/**
 	 * Sorts a list of objects in ascending natural order using * selection
 	 * sort.
 	 *
@@ -23,13 +29,15 @@ public class ListUtilities {
 	 * capacity is equal to the list's size.
 	 *
 	 *
-	 * @param list A list of objects. Assumes that the list's capacity is equal
-	 * to the list's size.
+	 * @param list
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
 	 *
-	 * @throws IllegalArgumentException if the parameter is * not full to
-	 * capacity.
+	 * @throws IllegalArgumentException
+	 *             if the parameter is * not full to capacity.
 	 *
-	 * @throws NullPointerException if the list is null.
+	 * @throws NullPointerException
+	 *             if the list is null.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void sort(Comparable[] list) throws IllegalArgumentException, NullPointerException {
@@ -43,8 +51,7 @@ public class ListUtilities {
 			list[i] = smallest;
 		}
 	}
-
-	/*
+	/**
 	 * Efficiently merges two sorted lists of objects in ascending natural
 	 * order. If the duplicate objects are in both lists, the object from list1
 	 * is merged into the resulting list, and* both objects are written to the
@@ -55,21 +62,27 @@ public class ListUtilities {
 	 * capacity.
 	 *
 	 *
-	 * @param list1 A naturally sorted list of objects. Assumes that the list
-	 * contains no duplicates and that its capacity is equal to its size.
+	 * @param list1
+	 *            A naturally sorted list of objects. Assumes that the list
+	 *            contains no duplicates and that its capacity is equal to its
+	 *            size.
 	 * 
-	 * @param list2 A naturally sorted list of objects. Assumes that the list
-	 * contains no duplicates and that its capacity is equal to its size.
+	 * @param list2
+	 *            A naturally sorted list of objects. Assumes that the list
+	 *            contains no duplicates and that its capacity is equal to its
+	 *            size.
 	 * 
-	 * @param duplicateFileName The name of the file in datafiles\duplicates to
-	 * which duplicate pairs will be appended.
+	 * @param duplicateFileName
+	 *            The name of the file in datafiles\duplicates to which
+	 *            duplicate pairs will be appended.
 	 *
-	 * @throws IllegalArgumentException if either parameter is not full to
-	 * capacity.
+	 * @throws IllegalArgumentException
+	 *             if either parameter is not full to capacity.
 	 *
-	 * @throws NullPointerException if the either list is null.
+	 * @throws NullPointerException
+	 *             if the either list is null.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws FileNotFoundException {
 		if (list1 == null || list2 == null) {
 			throw new NullPointerException("Neither of the lists can be null");
@@ -77,42 +90,35 @@ public class ListUtilities {
 		if (checkNull(list1) || checkNull(list2)) {
 			throw new IllegalArgumentException("One of the lists is not full to capacity");
 		}
-		Comparable[] listToReturn;
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
-				list1.length + list2.length);
+				(list1.length + list2.length) - countDuplicates(list1, list2));
+		ArrayList<String> duplicates = duplicatesList(list1, list2);
 		for (int i = 0, j = 0; i < list3.length; i++, j++) {
 			list3[i] = list1[j];
 			i++;
-			list3[i] = list2[j];
+			if (!(list2[j] == null)) {
+				list3[i] = list2[j];
+			} else {
+				i--;
+			}
 		}
 		sort(list3);
-		System.out.println("++++++++++++");
+		return list3;
+	}
 
-		Comparable[] duplicates = arrayDuplicates(list3);
-		Comparable[] list4 = (Comparable[]) Array.newInstance(list3.getClass().getComponentType(),
-				list3.length - duplicates.length);
-		if (duplicates.length > 0) {
-			File duplicatesFile = new File("H:\\git\\Project\\ReservationSys\\datafiles\\duplicates.txt");
-			PrintWriter duplicatesOut = new PrintWriter(duplicatesFile);
-			for (int j2 = 0, i2 = 0; j2 < list3.length; j2++, i2++) {
-				for (int k2 = 0; k2 < duplicates.length; k2++) {
-					if (list3[j2].compareTo(duplicates[k2]) == 0) {
-						duplicatesOut.println(list3[j2] + "(merged)");
-						duplicatesOut.println(duplicates[k2]);
-						list4[i2] = list3[j2];
-						j2++;
-					} else {
-						list4[i2] = list3[j2];
-					}
+	@SuppressWarnings("rawtypes")
+	private static ArrayList<String> duplicatesList(Comparable[] list1, Comparable[] list2) {
+		ArrayList<String> hold = new ArrayList<>();
+		for (int i = 0; i < list1.length; i++) {
+			for (int j = 0; j < list2.length; j++) {
+				if (list1[i].equals(list2[j])) {
+					hold.add(list1[i].toString()+"(merged)");
+					hold.add(list2[j].toString());
+					list2[j] = null;
 				}
 			}
-			duplicatesOut.close();
-			listToReturn = list4;
-			return listToReturn;
-		} else {
-			listToReturn = list3;
-			return listToReturn;
 		}
+		return hold;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -123,6 +129,19 @@ public class ListUtilities {
 			}
 		}
 		return false;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public static int countDuplicates(Comparable[] list1, Comparable[] list2) {
+		int count = 0;
+		for (int i = 0; i < list1.length; i++) {
+			for (int j = 0; j < list2.length; j++) {
+				if (list1[i].equals(list2[j])) {
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -149,48 +168,10 @@ public class ListUtilities {
 				break;
 			}
 			if (list[i].equals(list[i + 1])) {
-				duplicateList[count] = list[i+1];
+				duplicateList[count] = list[i + 1];
 				count++;
 			}
 		}
 		return duplicateList;
 	}
 }
-
-// isaak code vvvvv
-// int p=0;
-// int q=0;
-// int r=0;
-//
-// make new array
-// Comparable[] list3 = (Comparable[])
-// Array.newInstance(list1.getClass().getComponentType(),
-// list1.length + list2.length);
-
-// while (p<list1.length && q<list2.length)
-// {
-// if (list1[p].compareTo(list2[q]) == 0 ) // if same
-// {
-// //save p
-// list3[r++] = list1[p];
-// p++;
-// q++;
-// System.out.println("duplicate found:" + list3[r]);
-// }
-// else if (list1[p].compareTo(list2[q]) < 0 ) //p is smaller
-// {
-// //save p
-// list3[r++] = list1[p];
-// p++;
-// }
-// else if (list1[p].compareTo(list2[q]) > 0 ) //q is smaller
-// {
-// //save q
-// list3[r++] = list2[q];
-// q++;
-// }
-// }
-//
-// //shrink array by using the total counter r
-// Comparable[] listToReturn = Arrays.copyOf(list3, r);
-// end isaak code^^^
