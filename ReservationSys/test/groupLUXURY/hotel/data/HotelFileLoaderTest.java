@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Room;
+import groupLUXURY.hotel.business.DawsonCustomer;
 import groupLUXURY.util.ListUtilities;
 
 /**
@@ -16,14 +17,16 @@ import groupLUXURY.util.ListUtilities;
  *
  */
 public class HotelFileLoaderTest {
+	//"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\customers2.txt"
+	//"C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\unsorted\\customers1.txt"
 
 	/**
 	 * @param args
 	 * @throws FileNotFoundException
 	 */
 	public static void main(String[] args) throws IOException {
-		Room[] roomArrayTest = HotelFileLoader.getRoomListFromSequentialFile(
-				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\rooms.txt");
+//		Room[] roomArrayTest = HotelFileLoader.getRoomListFromSequentialFile(
+//				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\rooms.txt");
 //		 for (int i = 0; i < roomArrayTest.length; i++) {
 //		System.out.println(roomArrayTest[i]);
 //	 }
@@ -32,19 +35,12 @@ public class HotelFileLoaderTest {
 //				System.out.println(roomArrayTest[i]);
 //			 }
 		Customer[] customerArrayTest1 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\customers1.txt");
+				"C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\unsorted\\customers1.txt");
 		Customer[] customerArrayTest2 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"H:\\git\\Project\\ReservationSys\\datafiles\\unsorted\\customers2.txt");
+				"C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\unsorted\\customers2.txt");
 		ListUtilities.sort(customerArrayTest1);
 		ListUtilities.sort(customerArrayTest2);
-		for (int i = 0; i < customerArrayTest1.length; i++) {
-			System.out.println(customerArrayTest1[i]);
-		}
-		System.out.println("++++++++++++++");
-		for (int i = 0; i < customerArrayTest2.length; i++) {
-			System.out.println(customerArrayTest2[i]);
-		}
-		System.out.println("++++++++++++++");
+		ListUtilities.countDuplicates(customerArrayTest1,customerArrayTest2);
 		@SuppressWarnings("rawtypes")
 		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
 		for (int i = 0; i<mergeList.length;i++){
