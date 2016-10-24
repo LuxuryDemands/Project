@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.lib.creditcard.CreditCard;
 import groupLUXURY.hotel.business.DawsonHotelFactory;
@@ -52,7 +53,7 @@ public class HotelFileLoader {
 						.getInstance(CreditCard.CardType.valueOf(separatedItems[3].toUpperCase()), separatedItems[4]);
 				customerListArray[i].setCreditCard(Optional.of(customerCard));
 			}
-			if (customerListScanner.hasNext()==false){
+			if (customerListScanner.hasNext() == false) {
 				break;
 			}
 		}
@@ -60,6 +61,20 @@ public class HotelFileLoader {
 		return customerListArray;
 	}
 
+	public static Reservation[] getReservationListFromSequentialFile(String filename, Customer[] customerList,
+			Room[] roomList) throws IOException, IllegalArgumentException {
+
+	}
+	@SuppressWarnings("rawtypes")
+	private static boolean selectionSearch(Comparable[] reservationList, Comparable[] customerList, Comparable[] roomList){
+		boolean isContained = false;
+		for (int i=0;i<reservationList.length;i++){
+			for (int j=0;j<){
+				
+			}
+		}
+		return isContained;
+	}
 	private static String getRoomNumber(String roomString) {
 		return roomString.substring(0, roomString.indexOf('*'));
 	}
