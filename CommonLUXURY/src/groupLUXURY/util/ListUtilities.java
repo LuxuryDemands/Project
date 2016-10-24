@@ -52,12 +52,15 @@ public class ListUtilities {
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws FileNotFoundException {
+		//checks if any of the list is null and throws exception
 		if (list1 == null || list2 == null) {
 			throw new NullPointerException("Neither of the lists can be null");
 		}
+		//checks if any element in the list is null and throw exception
 		if (checkNull(list1) || checkNull(list2)) {
-			throw new IllegalArgumentException("One of the lists is not full to capacity");
+			throw new NullPointerException("One of the lists is not full to capacity");
 		}
+		//creates new comparable array
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
 		ArrayList<String> duplicates = duplicatesList(list1, list2);
