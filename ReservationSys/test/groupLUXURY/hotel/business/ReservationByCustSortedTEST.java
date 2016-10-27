@@ -3,6 +3,7 @@
  */
 package groupLUXURY.hotel.business;
 
+
 /**
  * @author kajal
  *

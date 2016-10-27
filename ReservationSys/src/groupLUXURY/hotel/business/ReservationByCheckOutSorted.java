@@ -1,14 +1,14 @@
 package groupLUXURY.hotel.business;
 
 import java.util.Comparator;
+
 import dw317.hotel.business.interfaces.Reservation;
 
 /**
  * @author kajal
  *
  */
-
-public class ReservationByCustSorted implements Comparator<Reservation> {
+public class ReservationByCheckOutSorted implements Comparator<Reservation> {
 
 	@Override
 	public int compare(Reservation r1, Reservation r2) {
@@ -17,11 +17,12 @@ public class ReservationByCustSorted implements Comparator<Reservation> {
 			return 0;
 		}
 
-		if (!r1.getCustomer().equals(r2.getCustomer())) {
-			return r1.getCustomer().compareTo(r2.getCustomer());
+		if (!r1.getCheckOutDate().equals(r2.getCheckOutDate())) {
+			return r1.getCheckOutDate().compareTo(r2.getCheckOutDate());
 		}
 
-		// if same customer, order by check in (i.e., default)
+		// // if same customer, order by check out (i.e., default)
 		return r1.compareTo(r2);
 	}
+
 }
