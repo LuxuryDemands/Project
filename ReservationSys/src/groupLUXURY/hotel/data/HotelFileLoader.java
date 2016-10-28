@@ -8,8 +8,10 @@ import java.util.Scanner;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
+import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
 import groupLUXURY.hotel.business.DawsonHotelFactory;
+import groupLUXURY.hotel.business.DawsonReservation;
 
 /**
  * @author 1331680
@@ -61,19 +63,50 @@ public class HotelFileLoader {
 		return customerListArray;
 	}
 
+	/*
+	 * uses the email field to find customer and roomnumber to find room returns
+	 * a reservation array
+	 * 
+	 */
 	public static Reservation[] getReservationListFromSequentialFile(String filename, Customer[] customerList,
 			Room[] roomList) throws IOException, IllegalArgumentException {
 
-	}
-	@SuppressWarnings("rawtypes")
-	private static boolean selectionSearch(Comparable[] reservationList, Comparable[] customerList, Comparable[] roomList){
-		boolean isContained = false;
-		for (int i=0;i<reservationList.length;i++){
-			for (int j=0;j<){
-				
+		Scanner reservationListScanner = new Scanner(new File(filename));
+		Reservation[] reservationListArray = new Reservation[numberOfItems(filename)];
+		Customer cust1;
+		Room room1;
+		for (int i = 0; i <= numberOfItems(filename); i++) {
+
+			String reservationString = reservationListScanner.next();
+			String[] separatedItems = separateItems(reservationString);
+			for (Customer c : customerList) {
+				if (!(c.getEmail().equals(new Email(separatedItems[i])))) // email
+																			// found
+					throw new IllegalArgumentException("Email not found: " + separatedItems[i]);
+				else {
+					cust1 = c;
+					for (Room r : roomList) {
+						if (!(r.getRoomNumber() == Integer.parseInt(separatedItems[7])))
+							throw new IllegalArgumentException("Room not found");
+						else {
+							room1 = r;
+							reservationListArray[i] = new DawsonReservation(cust1, room1,
+									Integer.parseInt(separatedItems[1]), Integer.parseInt(separatedItems[2]),
+									Integer.parseInt(separatedItems[3]), Integer.parseInt(separatedItems[4]),
+									Integer.parseInt(separatedItems[5]), Integer.parseInt(separatedItems[6]));
+						}
+					}
+
+				}
 			}
+
+			if (reservationListScanner.hasNext() == false) {
+				break;
+			}
+			reservationListScanner.close();
 		}
-		return isContained;
+		return reservationListArray;
+
 	}
 	private static String getRoomNumber(String roomString) {
 		return roomString.substring(0, roomString.indexOf('*'));
