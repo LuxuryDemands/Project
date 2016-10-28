@@ -77,6 +77,9 @@ public class ListUtilities {
 		sort(list3);
 		return list3;
 	}
+	
+	//note from kajal
+	// i need this method to accept a String for the path. Thank you~!
 	public static <E> void saveListToTextFile(ArrayList<E> list) throws FileNotFoundException{
 		File file = new File("C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\duplicates.txt");
 		PrintWriter print = new PrintWriter(file);
