@@ -82,8 +82,8 @@ public class Email implements Serializable, Comparable<Email> {
 	 * OverRiding the equals class
 	 * 
 	 * @param Object
-	 *            obj
-	 * @return true or false depending on whether or not the two objects are the
+	 *            The object to be compared.
+	 * @return True or False depending on whether or not the two objects are the
 	 *         same The two objects are the same if - this.obj is equal to the
 	 *         object in the param - object in the param is not null - object in
 	 *         the param is an instance of the class Email - if the address of
@@ -118,7 +118,7 @@ public class Email implements Serializable, Comparable<Email> {
 	 * 
 	 * @param other
 	 *            Customer object to compare
-	 * @return int Returns the comparision of this.email and other.email
+	 * @return int Returns the comparison of this.email and other.email
 	 */
 
 	@Override
@@ -183,7 +183,7 @@ public class Email implements Serializable, Comparable<Email> {
 
 	/**
 	 * validateHostName method validates the hostName depending on the
-	 * restrictions; Restrctions being: - Cannot start with a '.' or end with a
+	 * restrictions; Restrictions being: - Cannot start with a '.' or end with a
 	 * '.' - Cannot contain '..' anywhere - Has to match with any of the
 	 * following characters -->' a-z A-Z 0-9 . _ - '
 	 * 
