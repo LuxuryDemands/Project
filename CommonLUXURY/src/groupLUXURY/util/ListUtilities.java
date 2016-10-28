@@ -67,7 +67,7 @@ public class ListUtilities {
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
 		Object[] duplicates = duplicatesList(list1, list2);
-		saveListToTextFile(duplicates, "../ReservationSys/datafiles/duplicates.txt");
+		saveListToTextFile(duplicates, "../ReservationSys/datafiles/dupli/duplicates.txt");
 		for (int i = 0, j = 0; i < list3.length; i++, j++) {
 			list3[i] = list1[j];
 			i++;
