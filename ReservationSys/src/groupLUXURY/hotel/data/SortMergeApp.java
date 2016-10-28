@@ -20,14 +20,31 @@ import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 
 /**
- * @author kajal
+ * @author Sebastian, Maxime, Kajal, Isaak
  *
  */
 public class SortMergeApp {
-	public static void main(String[] args){
-		Path databaseFolderPath = Paths.get("ReservationSys/datafiles/database");
-		if (Files.notExists(databaseFolderPath)){
-			File databaseDirectory = new File("ReservationSys/datafiles/database");
+	public static void main(String[] args) throws FileNotFoundException, IOException{
+//		Path databaseFolderPath = Paths.get("datafiles/database");
+//		if (Files.notExists(databaseFolderPath)){
+//			File databaseDirectory = new File("datafiles/database");
+//			databaseDirectory.mkdir();
+//		}
+//		Room[] roomList = HotelFileLoader.getRoomListFromSequentialFile("datafiles/unsorted/rooms.txt");
+//		ListUtilities.sort(roomList);
+//		ListUtilities.saveListToTextFile(roomList, "datafiles/database/rooms.txt");
+		try{
+			for(int customerIndex = 1, count=1; customerIndex<11; customerIndex++,count++){
+				Customer[] customerList = HotelFileLoader.getCustomerListFromSequentialFile("datafiles/unsorted/customers"+customerIndex+".txt");
+				for (int i = 0; i<customerList.length; i++ ){
+					System.out.println(customerList[i]);
+				}
+				System.out.println("=================");
+				System.out.println(count);
+			}
+		}
+		catch(FileNotFoundException e){
+			
 		}
 	}
 	
