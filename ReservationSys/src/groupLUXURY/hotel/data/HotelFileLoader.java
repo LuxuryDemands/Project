@@ -14,7 +14,9 @@ import groupLUXURY.hotel.business.DawsonHotelFactory;
 import groupLUXURY.hotel.business.DawsonReservation;
 
 /**
- * @author 1331680
+ * This class compasses methods to get object lists from sequential text files.
+ * 
+ * @author Sebastian, Maxime, Isaak, Kajal
  *
  */
 public class HotelFileLoader {
@@ -23,6 +25,20 @@ public class HotelFileLoader {
 
 	}
 
+	/**
+	 * Creates a new Room array from a sequential text file.
+	 *
+	 * @param filename
+	 *            The path of the sequential text file.
+	 * 
+	 * @throws FileNotFoundException
+	 *             if the file is not found.
+	 * 
+	 * @throws IOException
+	 *             if there has been an input/output error.
+	 *
+	 * @return roomListScanner The Room array.
+	 */
 	public static Room[] getRoomListFromSequentialFile(String filename) throws IOException, FileNotFoundException {
 		Scanner roomListScanner = new Scanner(new File(filename));
 		Room[] roomListArray = new Room[numberOfItems(filename)];
@@ -38,6 +54,20 @@ public class HotelFileLoader {
 		return roomListArray;
 	}
 
+	/**
+	 * Creates a new Customer array from a sequential text file.
+	 *
+	 * @param filename
+	 *            The path of the sequential text file.
+	 * 
+	 * @throws FileNotFoundException
+	 *             if the file is not found.
+	 * 
+	 * @throws IOException
+	 *             if there has been an input/output error.
+	 *
+	 * @return customerListArray The Room array.
+	 */
 	public static Customer[] getCustomerListFromSequentialFile(String filename)
 			throws IOException, FileNotFoundException {
 		Scanner customerListScanner = new Scanner(new File(filename));
@@ -63,10 +93,26 @@ public class HotelFileLoader {
 		return customerListArray;
 	}
 
-	/*
-	 * uses the email field to find customer and roomnumber to find room returns
-	 * a reservation array
+	/**
+	 * Creates a new Reservation array from a sequential text file, a Customer
+	 * list and a Room list.
+	 *
+	 * @param filename
+	 *            The path of the sequential text file.
 	 * 
+	 * @param customerList
+	 *            A list of Customer objects.
+	 * 
+	 * @param roomList
+	 *            A list of Room objects.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the Customer or the Room are not found.
+	 * 
+	 * @throws IOException
+	 *             if there has been an input/output error.
+	 *
+	 * @return reservationListArray The Room list.
 	 */
 	public static Reservation[] getReservationListFromSequentialFile(String filename, Customer[] customerList,
 			Room[] roomList) throws IOException, IllegalArgumentException {
@@ -80,8 +126,7 @@ public class HotelFileLoader {
 			String reservationString = reservationListScanner.next();
 			String[] separatedItems = separateItems(reservationString);
 			for (Customer c : customerList) {
-				if (!(c.getEmail().equals(new Email(separatedItems[i])))) // email
-																			// found
+				if (!(c.getEmail().equals(new Email(separatedItems[i]))))
 					throw new IllegalArgumentException("Email not found: " + separatedItems[i]);
 				else {
 					cust1 = c;
@@ -96,7 +141,6 @@ public class HotelFileLoader {
 									Integer.parseInt(separatedItems[5]), Integer.parseInt(separatedItems[6]));
 						}
 					}
-
 				}
 			}
 
@@ -108,18 +152,59 @@ public class HotelFileLoader {
 		return reservationListArray;
 
 	}
+
+	/**
+	 * Gets the string representation of the room number from a string
+	 * representation of a Room object.
+	 *
+	 * @param roomString
+	 *            A string representation of a Room object.
+	 * 
+	 * @return the string representation of the room number.
+	 */
 	private static String getRoomNumber(String roomString) {
 		return roomString.substring(0, roomString.indexOf('*'));
 	}
 
+	/**
+	 * Gets the string representation of the room type from a string
+	 * representation of a Room object.
+	 *
+	 * @param roomString
+	 *            A string representation of a Room object.
+	 * 
+	 * @return the string representation of the room type.
+	 */
 	private static String getRoomType(String roomString) {
 		return roomString.substring(roomString.indexOf('*') + 1);
 	}
 
+	/**
+	 * Separates the string representation of a customer into separate string
+	 * representations of all its data members.
+	 *
+	 * @param customerString
+	 *            A string representation of a Customer object.
+	 * 
+	 * @return an Array of strings containing the string representations of all
+	 *         the Customer data members.
+	 */
 	private static String[] separateItems(String customerString) {
 		return customerString.split("[*]");
 	}
 
+	/**
+	 * Returns the total number of items in a sequential text file.
+	 *
+	 * @param fileName
+	 *            The path of the sequential text file.
+	 * 
+	 * @throws FileNotFoundException
+	 *             if the file is not found.
+	 * 
+	 * @return numberOfItems a number representing the number of items in the
+	 *         sequential text file.
+	 */
 	private static int numberOfItems(String fileName) throws FileNotFoundException {
 		int numberOfItems = 0;
 		Scanner whileLoopScanner = new Scanner(new File(fileName));
