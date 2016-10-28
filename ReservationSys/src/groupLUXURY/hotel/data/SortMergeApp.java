@@ -13,6 +13,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
@@ -24,11 +25,10 @@ import dw317.hotel.business.interfaces.Room;
  */
 public class SortMergeApp {
 	public static void main(String[] args){
-		Path 
-		if (Files.exists()){
-			
+		Path databaseFolderPath = Paths.get("ReservationSys/datafiles/database");
+		if (Files.notExists(databaseFolderPath)){
+			File databaseDirectory = new File("ReservationSys/datafiles/database");
 		}
-		File databaseDirectory = new File("ReservationSys/datafiles/database");
 	}
 	
 
