@@ -10,9 +10,10 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 
-
 /**
- * @author Sebastian
+ * This class compasses ListUtilities like sort and merge and other private
+ * methods.
+ * @author Sebastian, Kajal, Maxime, Isaak
  *
  */
 public class ListUtilities {
@@ -60,7 +61,7 @@ public class ListUtilities {
 		}
 		// checks if any element in the list is null and throw exception
 		if (checkNull(list1) || checkNull(list2)) {
-			throw new NullPointerException("One of the lists is not full to capacity");
+			throw new IllegalArgumentException("One of the lists is not full to capacity");
 		}
 		// creates new comparable array
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
@@ -109,6 +110,12 @@ public class ListUtilities {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void sort(Comparable[] list) throws IllegalArgumentException, NullPointerException {
+		if (list == null) {
+			throw new NullPointerException("The list cannot be null");
+		}
+		if (checkNull(list)){
+			throw new IllegalArgumentException("The list is not full to capacity");
+		}
 		for (int i = 0; i < list.length - 1; i++) {
 			int index = i;
 			for (int j = i + 1; j < list.length; j++)
@@ -120,6 +127,19 @@ public class ListUtilities {
 		}
 	}
 
+	/**
+	 * Creates an Object[] containing the duplicates from both files and
+	 * replaces the duplicate object in the second list with a null.
+	 * 
+	 * @param list1
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 * @param list2
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 * @return duplicatesArray A list of duplicate objects in list1 and list2
+	 * 
+	 */
 	@SuppressWarnings("rawtypes")
 	private static Object[] duplicatesList(Comparable[] list1, Comparable[] list2) {
 		Object[] duplicatesArray = new Object[countDuplicates(list1, list2) * 2];
@@ -135,7 +155,15 @@ public class ListUtilities {
 		}
 		return duplicatesArray;
 	}
-
+	/**
+	 * Checks if a list contains any null object(the list is not full to capacity)
+	 * 
+	 * @param list
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 * @return True if there is a null object, false otherwise
+	 * 
+	 */
 	@SuppressWarnings("rawtypes")
 	private static boolean checkNull(Comparable[] list) {
 		for (int i = 0; i < list.length; i++) {
@@ -145,7 +173,18 @@ public class ListUtilities {
 		}
 		return false;
 	}
-
+	/**
+	 * Counts the number of duplicates between two lists.
+	 * 
+	 * @param list1
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 * @param list2
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 * @return count The number of duplicates.
+	 * 
+	 */
 	@SuppressWarnings("rawtypes")
 	private static int countDuplicates(Comparable[] list1, Comparable[] list2) {
 		int count = 0;
@@ -165,19 +204,29 @@ public class ListUtilities {
 	 * Precondition: Assumes that the list is not null and that the list's
 	 * capacity is equal to the list's size.
 	 *
-	 * @param list A list of objects. Assumes that the list's capacity is equal
-	 * to the list's size.
+	 * @param list
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
 	 * 
-	 * @param sortOrder A Comparator object that defines the sort order
+	 * @param sortOrder
+	 *            A Comparator object that defines the sort order
 	 * 
-	 * @throws IllegalArgumentException if the parameter is not full to
-	 * capacity. *
+	 * @throws IllegalArgumentException
+	 *             if the parameter is not full to capacity. *
 	 * 
-	 * @throws NullPointerException if the list or sortOrder * are null.
+	 * @throws NullPointerException
+	 *             if the list or sortOrder * are null.
 	 */
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void sort(Comparable[] list, Comparator sortOrder) throws IllegalArgumentException, NullPointerException{
-		Arrays.sort(list,sortOrder);
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void sort(Comparable[] list, Comparator sortOrder)
+			throws IllegalArgumentException, NullPointerException {
+		if (list==null){
+			throw new NullPointerException("The list cannot be null");
+		}
+		if (checkNull(list)){
+			throw new IllegalArgumentException("The list is not full to capacity");
+		}
+		Arrays.sort(list, sortOrder);
 	}
 }
