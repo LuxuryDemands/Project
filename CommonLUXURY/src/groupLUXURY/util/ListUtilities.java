@@ -3,16 +3,10 @@
  */
 package groupLUXURY.util;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -163,7 +157,4 @@ public class ListUtilities {
 		}
 		return count;
 	}
-
-	
-
 }
