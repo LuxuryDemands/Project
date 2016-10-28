@@ -10,55 +10,62 @@ public class Email implements Serializable, Comparable<Email> {
 	protected final String address;
 
 	/**
-	 * Email Constructor with 1 param
-	 * Sets the new instance of address with a new string which is validated with the validateEmail method
-	 * @param address The Address
+	 * Email constructor with 1 param. Set the email instance using
+	 * validateEmail method for validating that the email is syntactically
+	 * correct.
+	 * 
+	 * @param address
+	 *            A string representing the email address.
 	 */
-	
+
 	public Email(String address) {
 		this.address = new String(validateEmail(address));
 	}
 
 	/**
-	 * getAddress method to get address
-	 * @return String Returns the address
+	 * Returns a String representation of the email.
+	 * 
+	 * @return String Returning the email address.
 	 */
-	
+
 	public String getAddress() {
 		return this.address;
 	}
 
 	/**
-	 * getUserID method to get the userID 
-	 * thisIsTheUserID@hostName.com
-	 * @return String Returns the UserID
+	 * Returns the user id.
+	 * 
+	 * @return String The user id.
 	 */
-	
+
 	public String getUserID() {
 		return address.substring(0, address.indexOf('@'));
 	}
 
 	/**
-	 * getHostName method to get the hostName
-	 * thisIsTheUserID@hostName.com
-	 * @return String Returns the HostName
+	 * Returns the user host.
+	 * 
+	 * @return String The user host.
 	 */
-	
-	
+
 	public String getHost() {
 		return address.substring(address.indexOf('@'));
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
-	
+
 	@Override
 	public String toString() {
 		return address;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 
@@ -73,19 +80,19 @@ public class Email implements Serializable, Comparable<Email> {
 
 	/**
 	 * OverRiding the equals class
-	 * @param Object obj
-	 * @return true or false depending on whether or not the two objects are the same
-	 * The two objects are the same if
-	 * - this.obj is equal to the object in the param
-	 * - object in the param is not null
-	 * - object in the param is an instance of the class Email
-	 * - if the address of the object in the param is not null
-	 * - if the address of the object comparing to is not null
-	 * - if the hostName are the same for both the objects
-	 * - if the userID are the same for both the objects
+	 * 
+	 * @param Object
+	 *            obj
+	 * @return true or false depending on whether or not the two objects are the
+	 *         same The two objects are the same if - this.obj is equal to the
+	 *         object in the param - object in the param is not null - object in
+	 *         the param is an instance of the class Email - if the address of
+	 *         the object in the param is not null - if the address of the
+	 *         object comparing to is not null - if the hostName are the same
+	 *         for both the objects - if the userID are the same for both the
+	 *         objects
 	 */
-	
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -105,16 +112,15 @@ public class Email implements Serializable, Comparable<Email> {
 		}
 		return true;
 	}
-	
+
 	/**
-	/**
-	 * Overrides abstract method compareTo from Comparable Class 
-	 * @param other Customer object to compare
+	 * /** Overrides abstract method compareTo from Comparable Class
+	 * 
+	 * @param other
+	 *            Customer object to compare
 	 * @return int Returns the comparision of this.email and other.email
 	 */
-	
-	
-	
+
 	@Override
 	public int compareTo(Email otherEmail) {
 		if (this.getHost().equals(otherEmail.getHost())) {
@@ -125,15 +131,21 @@ public class Email implements Serializable, Comparable<Email> {
 	}
 
 	/**
-	 * validateEmail method validates the hostName and userID to make sure they satisfy the restrictions.
-	 * @param emailAddress The Email Address
-	 * @throws IllegalArgumentException if there are no characters in the email
-	 * @throws IllegalArgumentException if the hostName and userID do not satisfy the validateHostName/validateUserID method restrictions.
+	 * validateEmail method validates the hostName and userID to make sure they
+	 * satisfy the restrictions.
+	 * 
+	 * @param emailAddress
+	 *            The Email Address
+	 * @throws IllegalArgumentException
+	 *             if there are no characters in the email
+	 * @throws IllegalArgumentException
+	 *             if the hostName and userID do not satisfy the
+	 *             validateHostName/validateUserID method restrictions.
 	 * @return String Returns the emailAddress
 	 */
-	
+
 	private static String validateEmail(String emailAddress) {
-		if (emailAddress.indexOf('@')==-1){
+		if (emailAddress.indexOf('@') == -1) {
 			throw new IllegalArgumentException("Invalid Email");
 		}
 		boolean host = validateHostName(emailAddress.substring(emailAddress.indexOf('@')));
@@ -147,15 +159,15 @@ public class Email implements Serializable, Comparable<Email> {
 
 	/**
 	 * validateUserID method validates the userID depending on the restrictions;
-	 * Restrictions being: 
-	 * - Cannot start with a '.' or end with a '.'
-	 * - Cannot contain '..' anywhere
-	 * - Has to match with any of the following characters: ' a-z A-Z 0-9 . _ - '
-	 * @param userID The UserID
+	 * Restrictions being: - Cannot start with a '.' or end with a '.' - Cannot
+	 * contain '..' anywhere - Has to match with any of the following
+	 * characters: ' a-z A-Z 0-9 . _ - '
+	 * 
+	 * @param userID
+	 *            The UserID
 	 * @return boolean Returning true or false whether it is satisfied or not.
 	 */
-	
-	
+
 	private static boolean validateUserID(String userID) {
 		if (userID.length() < 1 || userID.length() > 32) {
 			return false;
@@ -168,17 +180,17 @@ public class Email implements Serializable, Comparable<Email> {
 		}
 		return true;
 	}
-	
+
 	/**
-	 * validateHostName method validates the hostName depending on the restrictions;
-	 * Restrctions being: 
-	 * - Cannot start with a '.' or end with a '.'
-	 * - Cannot contain '..' anywhere
-	 * - Has to match with any of the following characters -->' a-z A-Z 0-9 . _ - '
-	 * @param hostName The Host Name
+	 * validateHostName method validates the hostName depending on the
+	 * restrictions; Restrctions being: - Cannot start with a '.' or end with a
+	 * '.' - Cannot contain '..' anywhere - Has to match with any of the
+	 * following characters -->' a-z A-Z 0-9 . _ - '
+	 * 
+	 * @param hostName
+	 *            The Host Name
 	 * @return boolean Returning true or false whether it is satisfied or not.
 	 */
-	
 
 	private static boolean validateHostName(String hostName) {
 		if (hostName.startsWith(".") || hostName.endsWith(".") || hostName.startsWith("-")) {
