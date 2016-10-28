@@ -7,7 +7,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+
 
 /**
  * @author Sebastian
@@ -52,24 +54,19 @@ public class ListUtilities {
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws FileNotFoundException {
-		//checks if any of the list is null and throws exception
+		// checks if any of the list is null and throws exception
 		if (list1 == null || list2 == null) {
 			throw new NullPointerException("Neither of the lists can be null");
 		}
-		//checks if any element in the list is null and throw exception
+		// checks if any element in the list is null and throw exception
 		if (checkNull(list1) || checkNull(list2)) {
 			throw new NullPointerException("One of the lists is not full to capacity");
 		}
-		//creates new comparable array
+		// creates new comparable array
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
 		Object[] duplicates = duplicatesList(list1, list2);
-		System.out.println("+++++++++++++++++++");
-		for (int index=0;index<duplicates.length;index++){
-			System.out.println(duplicates[index]);
-		}
-		System.out.println("+++++++++++++++++++");
-		saveListToTextFile(duplicates,"../ReservationSys/datafiles/duplicates.txt");
+		saveListToTextFile(duplicates, "../ReservationSys/datafiles/duplicates.txt");
 		for (int i = 0, j = 0; i < list3.length; i++, j++) {
 			list3[i] = list1[j];
 			i++;
@@ -82,18 +79,16 @@ public class ListUtilities {
 		sort(list3);
 		return list3;
 	}
-	
-	public static void saveListToTextFile(Object[] list, String path) throws FileNotFoundException{
+
+	public static void saveListToTextFile(Object[] list, String path) throws FileNotFoundException {
 		File file = new File(path);
 		PrintWriter print = new PrintWriter(file);
-		for (int i=0;i<list.length;i++){
+		for (int i = 0; i < list.length; i++) {
 			print.println(list[i]);
 		}
 		print.close();
 	}
-	
 
-	 
 	/**
 	 * Sorts a list of objects in ascending natural order using * selection
 	 * sort.
@@ -124,22 +119,21 @@ public class ListUtilities {
 			list[i] = smallest;
 		}
 	}
-	
 
 	@SuppressWarnings("rawtypes")
 	private static Object[] duplicatesList(Comparable[] list1, Comparable[] list2) {
-		Object[] hold = new Object[countDuplicates(list1,list2)*2];
+		Object[] duplicatesArray = new Object[countDuplicates(list1, list2) * 2];
 		for (int i = 0; i < list1.length; i++) {
-			for (int j = 0, k=0; j < list2.length; j++) {
+			for (int j = 0, k = 0; j < list2.length; j++) {
 				if (list1[i].equals(list2[j])) {
-					hold[k]=list1[i];
+					duplicatesArray[k] = list1[i];
 					k++;
-					hold[k]=list2[j];
+					duplicatesArray[k] = list2[j];
 					list2[j] = null;
 				}
 			}
 		}
-		return hold;
+		return duplicatesArray;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -163,5 +157,27 @@ public class ListUtilities {
 			}
 		}
 		return count;
+	}
+
+	/**
+	 * Sorts a list of objects in the given order.
+	 *
+	 * Precondition: Assumes that the list is not null and that the list's
+	 * capacity is equal to the list's size.
+	 *
+	 * @param list A list of objects. Assumes that the list's capacity is equal
+	 * to the list's size.
+	 * 
+	 * @param sortOrder A Comparator object that defines the sort order
+	 * 
+	 * @throws IllegalArgumentException if the parameter is not full to
+	 * capacity. *
+	 * 
+	 * @throws NullPointerException if the list or sortOrder * are null.
+	 */
+
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public static void sort(Comparable[] list, Comparator sortOrder) throws IllegalArgumentException, NullPointerException{
+		Arrays.sort(list,sortOrder);
 	}
 }
