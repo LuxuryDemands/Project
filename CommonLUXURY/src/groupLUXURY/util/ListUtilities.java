@@ -63,8 +63,13 @@ public class ListUtilities {
 		//creates new comparable array
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
-		ArrayList<String> duplicates = duplicatesList(list1, list2);
-		saveListToTextFile(duplicates);
+		Object[] duplicates = duplicatesList(list1, list2);
+		System.out.println("+++++++++++++++++++");
+		for (int index=0;index<duplicates.length;index++){
+			System.out.println(duplicates[index]);
+		}
+		System.out.println("+++++++++++++++++++");
+		saveListToTextFile(duplicates,"../ReservationSys/datafiles/duplicates.txt");
 		for (int i = 0, j = 0; i < list3.length; i++, j++) {
 			list3[i] = list1[j];
 			i++;
@@ -78,13 +83,11 @@ public class ListUtilities {
 		return list3;
 	}
 	
-	//note from kajal
-	// i need this method to accept a String for the path. Thank you~!
-	public static <E> void saveListToTextFile(ArrayList<E> list) throws FileNotFoundException{
-		File file = new File("C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\duplicates.txt");
+	public static void saveListToTextFile(Object[] list, String path) throws FileNotFoundException{
+		File file = new File(path);
 		PrintWriter print = new PrintWriter(file);
-		for (int i=0;i<list.size();i++){
-			print.println(list.get(i));
+		for (int i=0;i<list.length;i++){
+			print.println(list[i]);
 		}
 		print.close();
 	}
@@ -124,13 +127,14 @@ public class ListUtilities {
 	
 
 	@SuppressWarnings("rawtypes")
-	private static ArrayList<String> duplicatesList(Comparable[] list1, Comparable[] list2) {
-		ArrayList<String> hold = new ArrayList<>();
+	private static Object[] duplicatesList(Comparable[] list1, Comparable[] list2) {
+		Object[] hold = new Object[countDuplicates(list1,list2)*2];
 		for (int i = 0; i < list1.length; i++) {
-			for (int j = 0; j < list2.length; j++) {
+			for (int j = 0, k=0; j < list2.length; j++) {
 				if (list1[i].equals(list2[j])) {
-					hold.add(list1[i].toString() + "(merged)");
-					hold.add(list2[j].toString());
+					hold[k]=list1[i];
+					k++;
+					hold[k]=list2[j];
 					list2[j] = null;
 				}
 			}
