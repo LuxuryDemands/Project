@@ -3,10 +3,16 @@
  */
 package groupLUXURY.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +20,7 @@ import java.util.ArrayList;
  *
  */
 public class ListUtilities {
+private static final Charset CHARACTER_ENCODING = StandardCharsets.UTF_8;
 
 	private ListUtilities() {
 
@@ -85,6 +92,8 @@ public class ListUtilities {
 		}
 		print.close();
 	}
+	
+
 	 
 	/**
 	 * Sorts a list of objects in ascending natural order using * selection
@@ -155,4 +164,36 @@ public class ListUtilities {
 		}
 		return count;
 	}
+
+	public static void saveListToTextFile(Object[] objects, String filename) // added by kajal 
+			throws FileNotFoundException, UnsupportedEncodingException {
+		saveListToTextFile(objects, filename, false, CHARACTER_ENCODING);
+	}
+	
+	public static void saveListToTextFile(Object[] objects, String filename, boolean append)
+			throws FileNotFoundException, UnsupportedEncodingException {
+		saveListToTextFile(objects, filename, append, CHARACTER_ENCODING);
+	}
+	
+	public static void saveListToTextFile(Object[] objects, String filename, boolean append, Charset characterEncoding)
+			throws FileNotFoundException, UnsupportedEncodingException {
+
+		PrintWriter outputFile = null;
+
+		try {
+			FileOutputStream f = new FileOutputStream(filename, append);
+			OutputStreamWriter out = new OutputStreamWriter(f, characterEncoding);
+			outputFile = new PrintWriter(new BufferedWriter(out));
+
+			for (Object obj : objects)
+				if (obj != null)
+					outputFile.println(obj);
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException("Error saving list! Unable to access the device " + filename);
+		} finally {
+			if (outputFile != null)
+				outputFile.close();
+		}
+	}
+
 }
