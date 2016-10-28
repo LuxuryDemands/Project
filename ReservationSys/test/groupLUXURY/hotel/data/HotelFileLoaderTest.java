@@ -35,9 +35,9 @@ public class HotelFileLoaderTest {
 //				System.out.println(roomArrayTest[i]);
 //			 }
 		Customer[] customerArrayTest1 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\unsorted\\customers1.txt");
+				"datafiles/unsorted/customers1.txt");
 		Customer[] customerArrayTest2 = HotelFileLoader.getCustomerListFromSequentialFile(
-				"C:\\Users\\Sebastian\\Desktop\\Project\\ReservationSys\\datafiles\\unsorted\\customers2.txt");
+				"datafiles/unsorted/customers2.txt");
 		ListUtilities.sort(customerArrayTest1);
 		ListUtilities.sort(customerArrayTest2);
 		@SuppressWarnings("rawtypes")
