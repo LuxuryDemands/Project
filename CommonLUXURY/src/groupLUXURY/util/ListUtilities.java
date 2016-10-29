@@ -3,8 +3,11 @@
  */
 package groupLUXURY.util;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -13,6 +16,7 @@ import java.util.Comparator;
 /**
  * This class compasses ListUtilities like sort and merge and other private
  * methods.
+ * 
  * @author Sebastian, Kajal, Maxime, Isaak
  *
  */
@@ -46,48 +50,79 @@ public class ListUtilities {
 	 * @param duplicateFileName
 	 *            The name of the file in datafiles\duplicates to which
 	 *            duplicate pairs will be appended.
+	 * @throws IOException 
 	 *
 	 * @throws IllegalArgumentException
-	 *             if either parameter is not full to capacity.
+	 *             if either parameter are not full to capacity.
 	 *
 	 * @throws NullPointerException
-	 *             if the either list is null.
+	 *             if either lists are null.
 	 */
 	@SuppressWarnings({ "rawtypes" })
-	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws FileNotFoundException {
+	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws IOException {
 		if (list1 == null || list2 == null) {
 			throw new NullPointerException("Neither of the lists can be null");
 		}
 		if (checkNull(list1) || checkNull(list2)) {
 			throw new IllegalArgumentException("One of the lists is not full to capacity");
 		}
+		FileWriter fw = new FileWriter("../ReservationSys/datafiles/duplicate/duplicates.txt",true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter b = new PrintWriter(bw);
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
-		Object[] duplicates = duplicatesList(list1, list2);
-		saveListToTextFile(duplicates, "../ReservationSys/datafiles/duplicate/duplicates.txt");
 		int indexOfList3 = 0;
-		for (int i=0;i<list1.length;i++){
-			for (int j=0;j<list2.length;j++){
-				if (list1[i].equals(list2[j])){
-					list2[j]=null;
+		for (int i = 0; i < list1.length; i++) {
+			for (int j = 0; j < list2.length; j++) {
+				if (list1[i].equals(list2[j])) {
+					b.println(list1[i].toString()+"(merged)");
+					b.println(list2[j].toString());
+					list2[j] = null;
 				}
 			}
-			list3[i]=list1[i];
-			indexOfList3=i;
+			list3[i] = list1[i];
+			indexOfList3 = i;
 		}
 		indexOfList3++;
-		for (int k=0;k<list2.length;k++){
-			if (!(list2[k]==null)){
-				list3[indexOfList3]=list2[k];
+		for (int k = 0; k < list2.length; k++) {
+			if (!(list2[k] == null)) {
+				list3[indexOfList3] = list2[k];
 				indexOfList3++;
 			}
 		}
+		b.close();
 		sort(list3);
 		Comparable[] toReturn = list3;
 		return toReturn;
 	}
 
+	/**
+	 * General method to save the string representation of an array containing
+	 * any type of object into a sequential text file.
+	 *
+	 * Precondition: Assumes that the list is not null and that the list's
+	 * capacity is equal to the list's size.
+	 *
+	 *
+	 * @param list
+	 *            A list of objects. Assumes that the list's capacity is equal
+	 *            to the list's size.
+	 * @param path
+	 *            A string that specifies the target path for the file.
+	 *
+	 * @throws IllegalArgumentException
+	 *             if the parameter is * not full to capacity.
+	 *
+	 * @throws NullPointerException
+	 *             if the list is null.
+	 */
 	public static void saveListToTextFile(Object[] list, String path) throws FileNotFoundException {
+		if (list == null) {
+			throw new NullPointerException("The list cannot be null");
+		}
+		if (checkNull(list)) {
+			throw new IllegalArgumentException("The list is not full to capacity");
+		}
 		File file = new File(path);
 		PrintWriter print = new PrintWriter(file);
 		for (int i = 0; i < list.length; i++) {
@@ -119,7 +154,7 @@ public class ListUtilities {
 		if (list == null) {
 			throw new NullPointerException("The list cannot be null");
 		}
-		if (checkNull(list)){
+		if (checkNull(list)) {
 			throw new IllegalArgumentException("The list is not full to capacity");
 		}
 		for (int i = 0; i < list.length - 1; i++) {
@@ -134,33 +169,8 @@ public class ListUtilities {
 	}
 
 	/**
-	 * Creates an Object[] containing the duplicates from both lists.
-	 * 
-	 * @param list1
-	 *            A list of objects. Assumes that the list's capacity is equal
-	 *            to the list's size.
-	 * @param list2
-	 *            A list of objects. Assumes that the list's capacity is equal
-	 *            to the list's size.
-	 * @return duplicatesArray A list of duplicate objects in list1 and list2
-	 * 
-	 */
-	@SuppressWarnings("rawtypes")
-	private static Object[] duplicatesList(Comparable[] list1, Comparable[] list2) {
-		Object[] duplicatesArray = new Object[countDuplicates(list1, list2) * 2];
-		for (int i = 0; i < list1.length; i++) {
-			for (int j = 0, k = 0; j < list2.length; j++) {
-				if (list1[i].equals(list2[j])) {
-					duplicatesArray[k] = list1[i];
-					k++;
-					duplicatesArray[k] = list2[j];
-				}
-			}
-		}
-		return duplicatesArray;
-	}
-	/**
-	 * Checks if a list contains any null object(the list is not full to capacity)
+	 * Checks if a list contains any null object(the list is not full to
+	 * capacity)
 	 * 
 	 * @param list
 	 *            A list of objects. Assumes that the list's capacity is equal
@@ -168,8 +178,7 @@ public class ListUtilities {
 	 * @return True if there is a null object, false otherwise
 	 * 
 	 */
-	@SuppressWarnings("rawtypes")
-	private static boolean checkNull(Comparable[] list) {
+	private static boolean checkNull(Object[] list) {
 		for (int i = 0; i < list.length; i++) {
 			if (list[i] == null) {
 				return true;
@@ -177,6 +186,7 @@ public class ListUtilities {
 		}
 		return false;
 	}
+
 	/**
 	 * Counts the number of duplicates between two lists.
 	 * 
@@ -190,7 +200,7 @@ public class ListUtilities {
 	 * 
 	 */
 	@SuppressWarnings("rawtypes")
-	private static int countDuplicates(Comparable[] list1, Comparable[] list2) {
+	public static int countDuplicates(Comparable[] list1, Comparable[] list2) {
 		int count = 0;
 		for (int i = 0; i < list1.length; i++) {
 			for (int j = 0; j < list2.length; j++) {
@@ -225,10 +235,10 @@ public class ListUtilities {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void sort(Comparable[] list, Comparator sortOrder)
 			throws IllegalArgumentException, NullPointerException {
-		if (list==null){
+		if (list == null) {
 			throw new NullPointerException("The list cannot be null");
 		}
-		if (checkNull(list)){
+		if (checkNull(list)) {
 			throw new IllegalArgumentException("The list is not full to capacity");
 		}
 		Arrays.sort(list, sortOrder);
