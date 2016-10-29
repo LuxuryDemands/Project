@@ -55,30 +55,36 @@ public class ListUtilities {
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws FileNotFoundException {
-		// checks if any of the list is null and throws exception
 		if (list1 == null || list2 == null) {
 			throw new NullPointerException("Neither of the lists can be null");
 		}
-		// checks if any element in the list is null and throw exception
 		if (checkNull(list1) || checkNull(list2)) {
 			throw new IllegalArgumentException("One of the lists is not full to capacity");
 		}
-		// creates new comparable array
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
 		Object[] duplicates = duplicatesList(list1, list2);
-		saveListToTextFile(duplicates, "../ReservationSys/datafiles/duplicates/duplicates.txt");
-		for (int i = 0, j = 0; i < list3.length; i++, j++) {
-			list3[i] = list1[j];
-			i++;
-			if (!(list2[j] == null)) {
-				list3[i] = list2[j];
-			} else {
-				i--;
+		saveListToTextFile(duplicates, "../ReservationSys/datafiles/duplicate/duplicates.txt");
+		int indexOfList3 = 0;
+		for (int i=0;i<list1.length;i++){
+			for (int j=0;j<list2.length;j++){
+				if (list1[i].equals(list2[j])){
+					list2[j]=null;
+				}
+			}
+			list3[i]=list1[i];
+			indexOfList3=i;
+		}
+		indexOfList3++;
+		for (int k=0;k<list2.length;k++){
+			if (!(list2[k]==null)){
+				list3[indexOfList3]=list2[k];
+				indexOfList3++;
 			}
 		}
 		sort(list3);
-		return list3;
+		Comparable[] toReturn = list3;
+		return toReturn;
 	}
 
 	public static void saveListToTextFile(Object[] list, String path) throws FileNotFoundException {
@@ -128,8 +134,7 @@ public class ListUtilities {
 	}
 
 	/**
-	 * Creates an Object[] containing the duplicates from both files and
-	 * replaces the duplicate object in the second list with a null.
+	 * Creates an Object[] containing the duplicates from both lists.
 	 * 
 	 * @param list1
 	 *            A list of objects. Assumes that the list's capacity is equal
@@ -149,7 +154,6 @@ public class ListUtilities {
 					duplicatesArray[k] = list1[i];
 					k++;
 					duplicatesArray[k] = list2[j];
-					list2[j] = null;
 				}
 			}
 		}
