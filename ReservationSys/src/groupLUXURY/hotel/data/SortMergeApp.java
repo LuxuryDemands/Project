@@ -1,20 +1,12 @@
 package groupLUXURY.hotel.data;
 
 import groupLUXURY.util.ListUtilities;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
@@ -28,7 +20,7 @@ public class SortMergeApp {
 		createDatabaseDirectory();
 		createSortedDirectory();
 		loadSortRoomList();
-		loadSortMergeCustomerList();
+		sortMergeCustomerList();
 	}
 
 	private static void createDatabaseDirectory() {
@@ -53,15 +45,22 @@ public class SortMergeApp {
 		ListUtilities.saveListToTextFile(roomList, "datafiles/database/rooms.txt");
 	}
 
-	private static void loadSortMergeCustomerList() throws IOException {
+	@SuppressWarnings("rawtypes")
+	private static void sortMergeCustomerList() throws IOException {
 		try {
-			for (int customerIndex = 1; customerIndex < 11; customerIndex++) {
-				Customer[] customerList = HotelFileLoader
-						.getCustomerListFromSequentialFile("datafiles/unsorted/customers" + customerIndex + ".txt");
+			Comparable[] test = loadCustomerList("datafiles/unsorted/customers1.txt");
+			for (int i = 2; i < 11; i++) {
+				test = ListUtilities.merge(test, loadCustomerList("datafiles/unsorted/customers" + i + ".txt"));
 			}
+			ListUtilities.saveListToTextFile(test, "datafiles/sorted/customers.txt");
 		} catch (FileNotFoundException e) {
 
 		}
+	}
+
+	private static Customer[] loadCustomerList(String path) throws FileNotFoundException, IOException {
+		Customer[] customerList = HotelFileLoader.getCustomerListFromSequentialFile(path);
+		return customerList;
 	}
 
 }
