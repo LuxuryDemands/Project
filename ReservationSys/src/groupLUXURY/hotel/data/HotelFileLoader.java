@@ -151,46 +151,6 @@ public class HotelFileLoader {
 		reservationListScanner.close();
 		return reservationListArray;
 	}
-	// public static Reservation[] getReservationListFromSequentialFile(String
-	// filename, Customer[] customerList,
-	// Room[] roomList) throws IOException, IllegalArgumentException {
-	//
-	// Scanner reservationListScanner = new Scanner(new File(filename));
-	// Reservation[] reservationListArray = new
-	// Reservation[numberOfItems(filename)];
-	// Customer cust1;
-	// Room room1;
-	// for (int i = 0; i <= numberOfItems(filename); i++) {
-	// String reservationString = reservationListScanner.next();
-	// String[] separatedItems = separateItems(reservationString);
-	// for (Customer c : customerList) {
-	// if ((c.getEmail().equals(new Email(separatedItems[i]))))
-	// throw new IllegalArgumentException("Email not found: " +
-	// separatedItems[i]);
-	// else {
-	// cust1 = c;
-	// for (Room r : roomList) {
-	// if (!(r.getRoomNumber() == Integer.parseInt(separatedItems[7])))
-	// throw new IllegalArgumentException("Room not found");
-	// else {
-	// room1 = r;
-	// reservationListArray[i] = new DawsonReservation(cust1, room1,
-	// Integer.parseInt(separatedItems[1]), Integer.parseInt(separatedItems[2]),
-	// Integer.parseInt(separatedItems[3]), Integer.parseInt(separatedItems[4]),
-	// Integer.parseInt(separatedItems[5]),
-	// Integer.parseInt(separatedItems[6]));
-	// }
-	// }
-	// }
-	// }
-	// if (reservationListScanner.hasNext() == false) {
-	// break;
-	// }
-	// reservationListScanner.close();
-	// }
-	// return reservationListArray;
-	// }
-
 	/**
 	 * Gets the string representation of the room number from a string
 	 * representation of a Room object.
