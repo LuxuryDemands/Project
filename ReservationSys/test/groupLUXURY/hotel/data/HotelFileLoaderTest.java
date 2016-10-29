@@ -47,11 +47,6 @@ public class HotelFileLoaderTest {
 //		}
 //		ListUtilities.sort(customerArrayTest1);
 //		ListUtilities.sort(customerArrayTest2);
-		@SuppressWarnings("rawtypes")
-		Comparable[] mergeList = ListUtilities.merge(customerArrayTest1,customerArrayTest2);
-		for (Comparable c: mergeList){
-			System.out.println(c);
-		}
 //		Comparable[] duplicateList = ListUtilities.arrayDuplicates(mergeList);
 //		for (int i = 0; i<duplicateList.length;i++){
 //			System.out.println(duplicateList[i]);

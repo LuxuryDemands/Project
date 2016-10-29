@@ -59,14 +59,14 @@ public class ListUtilities {
 	 *             if either lists are null.
 	 */
 	@SuppressWarnings({ "rawtypes" })
-	public static Comparable[] merge(Comparable[] list1, Comparable[] list2) throws IOException {
+	public static Comparable[] merge(Comparable[] list1, Comparable[] list2, String duplicateFilename) throws IOException {
 		if (list1 == null || list2 == null) {
 			throw new NullPointerException("Neither of the lists can be null");
 		}
 		if (checkNull(list1) || checkNull(list2)) {
 			throw new IllegalArgumentException("One of the lists is not full to capacity");
 		}
-		FileWriter fw = new FileWriter("../ReservationSys/datafiles/duplicate/duplicates.txt",true);
+		FileWriter fw = new FileWriter(duplicateFilename,true);
 		BufferedWriter bw = new BufferedWriter(fw);
 		PrintWriter b = new PrintWriter(bw);
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
@@ -77,6 +77,7 @@ public class ListUtilities {
 				if (list1[i].equals(list2[j])) {
 					b.println(list1[i].toString()+"(merged)");
 					b.println(list2[j].toString());
+					b.println("PREVIOUS MERGE BEFORE");
 					list2[j] = null;
 				}
 			}

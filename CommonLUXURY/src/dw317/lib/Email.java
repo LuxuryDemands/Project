@@ -151,7 +151,7 @@ public class Email implements Serializable, Comparable<Email> {
 		boolean host = validateHostName(emailAddress.substring(emailAddress.indexOf('@')));
 		boolean userID = validateUserID(emailAddress.substring(0, emailAddress.indexOf('@')));
 		if (!host || !userID) {
-			throw new IllegalArgumentException("Invalid Email");
+			throw new IllegalArgumentException("Invalid Email: "+emailAddress);
 		} else {
 			return emailAddress;
 		}

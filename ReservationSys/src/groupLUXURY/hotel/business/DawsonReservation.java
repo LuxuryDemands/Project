@@ -43,11 +43,11 @@ public class DawsonReservation implements Reservation {
 		this.checkOutDate = LocalDate.of(outYear, outMonth, outDay);
 		if (this.checkInDate.isAfter(checkOutDate)) {
 			throw new IllegalArgumentException(
-					"The check in date must be before or in the same date as the check out day");
+					"The check in date must be before or in the same date as the check out day: "+customer.getEmail().toString());
 		}
-		if (this.checkInDate.isBefore(LocalDate.now())) {
-			throw new IllegalArgumentException("You cannot make a reservation for a day in the past");
-		}
+//		if (this.checkInDate.isBefore(LocalDate.now())) {
+//			throw new IllegalArgumentException("You cannot make a reservation for a day in the past");
+//		}
 		this.customer = customer;
 		this.room = room;
 	}
