@@ -23,15 +23,18 @@ public class DawsonCustomer implements Customer {
 	protected final Email email;
 	protected CreditCard creditCard;
 
-	
 	/**
-	 * DawsonCustomer constructor with 3 params.
-	 * Sets all the new instances of name,email,creditCard with the ones given in the param
-	 * @param firstName The first name of the customer
-	 * @param lastName The last name of the customer
-	 * @param email The email of the customer
+	 * DawsonCustomer constructor with 3 params. Sets all the new instances of
+	 * name,email,creditCard with the ones given in the param
+	 * 
+	 * @param firstName
+	 *            The first name of the customer
+	 * @param lastName
+	 *            The last name of the customer
+	 * @param email
+	 *            The email of the customer
 	 */
-	
+
 	public DawsonCustomer(String firstName, String lastName, String email) {
 		this.name = new Name(firstName, lastName);
 		this.email = new Email(email);
@@ -39,64 +42,72 @@ public class DawsonCustomer implements Customer {
 	}
 
 	/**
-	 * Overrides abstract method compareTo from Comparable Class 
-	 * @param other Customer object to compare
+	 * Overrides abstract method compareTo from Comparable Class
+	 * 
+	 * @param other
+	 *            Customer object to compare
 	 * @return int Returns the comparision of this.email and other.email
 	 */
-	
-	
+
 	@Override
 	public int compareTo(Customer other) {
 		return this.email.compareTo(other.getEmail());
-			
+
 	}
 
 	/**
-	 * Overrides abstract method getName from Customer Class 
+	 * Overrides abstract method getName from Customer Class
+	 * 
 	 * @return Name object's name defensive copying.
 	 */
-	
+
 	@Override
 	public Name getName() {
 		return new Name(this.name);
 	}
 
 	/**
-	 * Overrides abstract method getEmail from Customer Class 
+	 * Overrides abstract method getEmail from Customer Class
+	 * 
 	 * @return Email object's address defensive copying
 	 */
-	
-	
+
 	@Override
 	public Email getEmail() {
 		return new Email(this.email.getAddress());
 	}
-	
+
 	/**
-	 * Overrides abstract method getCreditCard from Customer Class 
-	 * @return CreditCard Returns a CreditCard object if it exists and it is not null.
+	 * Overrides abstract method getCreditCard from Customer Class
+	 * 
+	 * @return CreditCard Returns a CreditCard object if it exists and it is not
+	 *         null.
 	 */
 
 	@Override
 	public Optional<CreditCard> getCreditCard() {
 		return Optional.ofNullable(creditCard);
 	}
-	
+
 	/**
-	 * Overrides abstract method setCreditCard from Customer Class 
-	 * Sets a new instance of creditCard
-	 * @param card Optional CreditCard card
+	 * Overrides abstract method setCreditCard from Customer Class Sets a new
+	 * instance of creditCard
+	 * 
+	 * @param card
+	 *            Optional CreditCard card
 	 */
-	
+
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
 		this.creditCard = card.orElse(null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -105,10 +116,12 @@ public class DawsonCustomer implements Customer {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -126,18 +139,19 @@ public class DawsonCustomer implements Customer {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		String creditCardToString;
-		if (this.creditCard==null){
-			creditCardToString="*";
+		if (this.creditCard == null) {
+			creditCardToString = "*";
+		} else {
+			creditCardToString = this.creditCard.toString();
 		}
-		else{
-			creditCardToString=this.creditCard.toString();
-		}
-		return this.email.toString()+"*"+this.name.toString()+"*"+creditCardToString;
+		return this.email.toString() + "*" + this.name.toString() + "*" + creditCardToString;
 	}
 }
