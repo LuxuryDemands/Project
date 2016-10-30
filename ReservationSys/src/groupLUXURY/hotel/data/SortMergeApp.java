@@ -74,8 +74,11 @@ public class SortMergeApp {
 		Comparable[] holder2 = loadReservationList("datafiles/unsorted/reservations1.txt", customerList, roomList);
 		for (int i = 2; i < 11; i++) {
 			holder2 = ListUtilities.merge(holder2,
-					loadReservationList("datafiles/unsorted/reservations1.txt", customerList, roomList),
+					loadReservationList(("datafiles/unsorted/reservations"+i+".txt"), customerList, roomList),
 					"datafiles/duplicate/duplicateReservations.txt");
+		}
+		for (Comparable c: holder2){
+			System.out.println(c);
 		}
 		ListUtilities.sort(holder2);
 		ListUtilities.saveListToTextFile(holder2, "datafiles/database/reservations.txt");

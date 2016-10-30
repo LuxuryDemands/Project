@@ -11,8 +11,6 @@ import dw317.hotel.business.interfaces.Room;
 import dw317.lib.Email;
 import dw317.lib.creditcard.CreditCard;
 import groupLUXURY.hotel.business.DawsonHotelFactory;
-import groupLUXURY.hotel.business.DawsonReservation;
-
 /**
  * This class compasses methods to get object lists from sequential text files.
  * 
