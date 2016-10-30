@@ -110,7 +110,7 @@ public class HotelFileLoader {
 	 * @throws IOException
 	 *             if there has been an input/output error.
 	 *
-	 * @return reservationListArray The Room list.
+	 * @return reservationListArray The Reservation list.
 	 */
 	public static Reservation[] getReservationListFromSequentialFile(String filename, Customer[] customerList,
 			Room[] roomList) throws IOException, IllegalArgumentException {

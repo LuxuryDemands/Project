@@ -92,7 +92,6 @@ public class ListUtilities {
 			}
 		}
 		b.close();
-		sort(list3);
 		Comparable[] toReturn = list3;
 		return toReturn;
 	}

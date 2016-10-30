@@ -19,61 +19,77 @@ public class DawsonReservation implements Reservation {
 	protected LocalDate checkOutDate;
 
 	/**
-	 * DawsonReservation constructor with 8 params.
-	 * sets new instances of checkInDate using LocalDate.of method with params: inYear, inMonth, inDay
-	 * sets new instances of checkOutDate using LocalDate.of method with params: outYear, outMonth, outDay
-	 * sets new instances of customer
-	 * sets new instances of room
-	 * @throws IllegalArgumentException if the in day is BEFORE the out day.
-	 * @throws IllegalArgumentException if the in day is BEFORE the current day
-	 * @param customer The customer
-	 * @param room The room
-	 * @param inYear The check in date: year
-	 * @param inMonth The check in date: month
-	 * @param inDay The check in date: day
-	 * @param outYear The check out date: year
-	 * @param outMonth The check out date: month
-	 * @param outDay The check out date: day
+	 * DawsonReservation constructor with 8 params. sets new instances of
+	 * checkInDate using LocalDate.of method with params: inYear, inMonth, inDay
+	 * sets new instances of checkOutDate using LocalDate.of method with params:
+	 * outYear, outMonth, outDay sets new instances of customer sets new
+	 * instances of room
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the in day is BEFORE the out day.
+	 * @throws IllegalArgumentException
+	 *             if the in day is BEFORE the current day
+	 * @param customer
+	 *            The customer
+	 * @param room
+	 *            The room
+	 * @param inYear
+	 *            The check in date: year
+	 * @param inMonth
+	 *            The check in date: month
+	 * @param inDay
+	 *            The check in date: day
+	 * @param outYear
+	 *            The check out date: year
+	 * @param outMonth
+	 *            The check out date: month
+	 * @param outDay
+	 *            The check out date: day
 	 */
-	
-	
+
 	public DawsonReservation(Customer customer, Room room, int inYear, int inMonth, int inDay, int outYear,
 			int outMonth, int outDay) {
 		this.checkInDate = LocalDate.of(inYear, inMonth, inDay);
 		this.checkOutDate = LocalDate.of(outYear, outMonth, outDay);
 		if (this.checkInDate.isAfter(checkOutDate)) {
 			throw new IllegalArgumentException(
-					"The check in date must be before or in the same date as the check out day: "+customer.getEmail().toString());
+					"The check in date must be before or in the same date as the check out day: "
+							+ customer.getEmail().toString());
 		}
-//		if (this.checkInDate.isBefore(LocalDate.now())) {
-//			throw new IllegalArgumentException("You cannot make a reservation for a day in the past");
-//		}
+		// if (this.checkInDate.isBefore(LocalDate.now())) {
+		// throw new IllegalArgumentException("You cannot make a reservation for
+		// a day in the past");
+		// }
 		this.customer = customer;
 		this.room = room;
 	}
 
 	/**
 	 * overRiding compareTo method
-	 * @param other Reservation to be compared to.
-	 * @return room compared with other room OR checkInDate compared with other getCheckOutDate
+	 * 
+	 * @param other
+	 *            Reservation to be compared to.
+	 * @return room compared with other room OR checkInDate compared with other
+	 *         getCheckOutDate
 	 */
 	@Override
 	public int compareTo(Reservation other) {
-		// TODO Auto-generated method stub
-		if (this.checkInDate==this.checkOutDate){
+		if (this.checkInDate == other.getCheckOutDate()) {
 			return this.room.compareTo(other.getRoom());
-		}
-		else{
-			return this.checkInDate.compareTo(other.getCheckOutDate());
+		} else {
+			return this.checkInDate.compareTo(other.getCheckInDate());
 		}
 	}
 
 	/**
-	 * Overrides abstract method getCustomer from Reservation class
-	 * Sets new instances of firstName with customer's getName and getFirstName method
-	 * Sets new instances of lastName with customer's getName and getLastName method
-	 * Sets new instances of email with customer's getEmail and getAddress
-	 * @return Customer Returns a DawsonCustomer object with params:firstName, lastName, email
+	 * Overrides abstract method getCustomer from Reservation class Sets new
+	 * instances of firstName with customer's getName and getFirstName method
+	 * Sets new instances of lastName with customer's getName and getLastName
+	 * method Sets new instances of email with customer's getEmail and
+	 * getAddress
+	 * 
+	 * @return Customer Returns a DawsonCustomer object with params:firstName,
+	 *         lastName, email
 	 */
 	@Override
 	public Customer getCustomer() {
@@ -86,9 +102,10 @@ public class DawsonReservation implements Reservation {
 
 	/**
 	 * overRiding getRoom method
+	 * 
 	 * @return room Returning the room
 	 */
-	
+
 	@Override
 	public Room getRoom() {
 		// TODO Auto-generated method stub
@@ -97,39 +114,46 @@ public class DawsonReservation implements Reservation {
 
 	/**
 	 * Overrides abstract method getCheckInDate from Reservation class
-	 * @return LocalDate Returning a LocalDate object of the check in date with the result: YYYY*MM*DD
+	 * 
+	 * @return LocalDate Returning a LocalDate object of the check in date with
+	 *         the result: YYYY*MM*DD
 	 */
-	
+
 	@Override
 	public LocalDate getCheckInDate() {
-		return LocalDate.of(checkInDate.getYear(),checkInDate.getMonthValue(),checkInDate.getDayOfMonth());
+		return LocalDate.of(checkInDate.getYear(), checkInDate.getMonthValue(), checkInDate.getDayOfMonth());
 	}
 
 	/**
 	 * Overrides abstract method getCheckOutDate from Reservation class
-	 * @return LocalDate Returning a LocalDate object of the check out date with the result: YYYY*MM*DD
+	 * 
+	 * @return LocalDate Returning a LocalDate object of the check out date with
+	 *         the result: YYYY*MM*DD
 	 */
-	
+
 	@Override
 	public LocalDate getCheckOutDate() {
-		return LocalDate.of(checkOutDate.getYear(),checkOutDate.getMonthValue(),checkOutDate.getDayOfMonth());
+		return LocalDate.of(checkOutDate.getYear(), checkOutDate.getMonthValue(), checkOutDate.getDayOfMonth());
 	}
 
 	/**
 	 * Overrides abstract method getNumberOfDays from Reservation class
-	 * @return int Returning the days between the check in dates and the check out dates
+	 * 
+	 * @return int Returning the days between the check in dates and the check
+	 *         out dates
 	 */
-	
+
 	@Override
 	public int getNumberOfDays() {
 		return this.checkInDate.until(checkOutDate).getDays();
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
-	
+
 	@Override
 	public final int hashCode() {
 		final int prime = 31;
@@ -141,11 +165,12 @@ public class DawsonReservation implements Reservation {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	
-	
+
 	@Override
 	public final boolean equals(Object obj) {
 		if (this == obj)
@@ -178,24 +203,27 @@ public class DawsonReservation implements Reservation {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return this.customer.getEmail().toString()+"*"+formatDate(this.checkInDate)+"*"+formatDate(this.checkOutDate)+"*"+this.getRoom().getRoomNumber();
+		return this.customer.getEmail().toString() + "*" + formatDate(this.checkInDate) + "*"
+				+ formatDate(this.checkOutDate) + "*" + this.getRoom().getRoomNumber();
 	}
-	
+
 	/**
 	 * formatDate method that formats a date structure
-	 * @param LocalDate The date to be formatted
+	 * 
+	 * @param LocalDate
+	 *            The date to be formatted
 	 * @return String Returning results: YYYY*MM*DD
 	 */
-	
-	
-	private String formatDate(LocalDate date){
-		return date.getYear()+"*"+date.getMonthValue()+"*"+date.getDayOfMonth();
+
+	private String formatDate(LocalDate date) {
+		return date.getYear() + "*" + date.getMonthValue() + "*" + date.getDayOfMonth();
 	}
-	
 
 }
