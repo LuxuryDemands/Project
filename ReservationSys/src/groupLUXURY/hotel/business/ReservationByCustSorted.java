@@ -20,8 +20,8 @@ public class ReservationByCustSorted implements Comparator<Reservation> {
 	 * @param r2
 	 *            A reservation object.
 	 * 
-	 * @return int 0 if they are equal, 1 if r1 is greather than r2, -1 if r2 is
-	 *         greather than r1.
+	 * @return int 0 if they are equal, 1 if r1 is greater than r2, -1 if r2 is
+	 *         greater than r1.
 	 */
 	@Override
 	public int compare(Reservation r1, Reservation r2) {
