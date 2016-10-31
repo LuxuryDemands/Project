@@ -5,8 +5,6 @@ package group.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import groupLUXURY.hotel.data.HotelFileLoader;
 import groupLUXURY.util.ListUtilities;
 
 /**
@@ -24,15 +22,20 @@ public class ListUtilitiesTest {
 		testTheMergeMethod();
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "unused" })
 	public static void testTheMergeMethod() throws FileNotFoundException, IOException {
-		Comparable[] customerList1 = HotelFileLoader
-				.getCustomerListFromSequentialFile("../ReservationSys/datafiles/unsorted/customers1.txt");
-		Comparable[] customerList2 = HotelFileLoader
-				.getCustomerListFromSequentialFile("../ReservationSys/datafiles/unsorted/customers2.txt");
-		System.out.println("\nTesting the three parameter constructor.");
-		testTheMergeMethod("Case 1A - Valid data (datafiles/unsorted/rooms.txt)", customerList1, customerList2,
-				"../ReservationSys/datafiles/duplicate/duplicates.txt", true);
+		String[] stringArr1 = { "nonduplicate", "duplicate" };
+		String[] stringArr2 = { "nonduplicate1", "duplicate" };
+		String[] stringArr3 = { "nonduplicate", "duplicate" };
+		String[] stringArr4 = { "nonduplicate1", "duplicates" };
+		Integer[] intArr1 = { 1, 2, 3 };
+		Integer[] intArr2 = { 2, 3, 4 };
+		testTheMergeMethod("Case 1 - Valid data (2 String arrays with a duplicate in both)", stringArr1, stringArr2,
+				"../ReservationSys/datafiles/testCase1.txt", true);
+		testTheMergeMethod("Case 2 - Valid data (2 String arrays with no duplicates in both)", stringArr3, stringArr4,
+				"../ReservationSys/datafiles/testCase2.txt", true);
+//		testTheMergeMethod("Case 3 - Invalid data (2 different type of arrays)", stringArr3, intArr1,
+//				"../ReservationSys/datafiles/testCase3.txt", false);
 	}
 
 	@SuppressWarnings("rawtypes")
