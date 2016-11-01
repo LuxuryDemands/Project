@@ -1,9 +1,11 @@
 /**
  * 
  */
-package dw317.lib.creditcard;
+package groupLUXURY.lib.creditcard;
 
 import static java.lang.System.out;
+
+import groupLUXURY.lib.creditcard.Amex;
 
 /**
  * @author Sebastian

@@ -1,4 +1,4 @@
-package dw317.lib.creditcard;
+package groupLUXURY.lib.creditcard;
 
 import java.io.Serializable;
 /**

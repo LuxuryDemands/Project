@@ -1,11 +1,12 @@
 /**
  * 
  */
-package dw317.lib.creditcard;
+package groupLUXURY.lib.creditcard;
 
 import static java.lang.System.out;
 
-import dw317.lib.Email;
+import groupLUXURY.lib.Email;
+import groupLUXURY.lib.creditcard.Visa;
 
 /**
  * @author Sebastian

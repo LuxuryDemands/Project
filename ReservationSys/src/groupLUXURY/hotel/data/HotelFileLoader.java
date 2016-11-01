@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
-import dw317.hotel.business.interfaces.Customer;
-import dw317.hotel.business.interfaces.Reservation;
-import dw317.hotel.business.interfaces.Room;
-import dw317.lib.Email;
-import dw317.lib.creditcard.CreditCard;
+
 import groupLUXURY.hotel.business.DawsonHotelFactory;
+import groupLUXURY.hotel.business.interfaces.Customer;
+import groupLUXURY.hotel.business.interfaces.Reservation;
+import groupLUXURY.hotel.business.interfaces.Room;
+import groupLUXURY.lib.Email;
+import groupLUXURY.lib.creditcard.CreditCard;
 /**
  * This class compasses methods to get object lists from sequential text files.
  * 

@@ -1,11 +1,11 @@
-package dw317.hotel.business.interfaces;
+package groupLUXURY.hotel.business.interfaces;
 
 import java.io.Serializable;
 import java.util.Optional;
 
-import dw317.lib.Email;
-import dw317.lib.Name;
-import dw317.lib.creditcard.CreditCard;
+import groupLUXURY.lib.Email;
+import groupLUXURY.lib.Name;
+import groupLUXURY.lib.creditcard.CreditCard;
 
 /**
  * @author Sebastian, Max, isaak

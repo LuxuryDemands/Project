@@ -4,7 +4,7 @@
 package groupLUXURY.hotel.business;
 
 
-import dw317.hotel.business.interfaces.Room;
+import groupLUXURY.hotel.business.interfaces.Room;
 
 /**
  * @author Sebastian, Max, Isaak

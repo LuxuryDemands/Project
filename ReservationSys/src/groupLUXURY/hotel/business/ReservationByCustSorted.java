@@ -1,7 +1,8 @@
 package groupLUXURY.hotel.business;
 
 import java.util.Comparator;
-import dw317.hotel.business.interfaces.Reservation;
+
+import groupLUXURY.hotel.business.interfaces.Reservation;
 
 /**
  * @author Kajal, Sebastian, Maxime, Isaak

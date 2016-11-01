@@ -5,8 +5,8 @@ package groupLUXURY.hotel.business;
 
 import java.util.Optional;
 
-import dw317.lib.creditcard.CreditCard;
-import dw317.lib.creditcard.CreditCard.CardType;
+import groupLUXURY.lib.creditcard.CreditCard;
+import groupLUXURY.lib.creditcard.CreditCard.CardType;
 
 /**
  * @author Sebastian

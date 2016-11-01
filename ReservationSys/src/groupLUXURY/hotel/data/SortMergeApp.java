@@ -1,5 +1,8 @@
 package groupLUXURY.hotel.data;
 
+import groupLUXURY.hotel.business.interfaces.Customer;
+import groupLUXURY.hotel.business.interfaces.Reservation;
+import groupLUXURY.hotel.business.interfaces.Room;
 import groupLUXURY.util.ListUtilities;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,9 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import dw317.hotel.business.interfaces.Customer;
-import dw317.hotel.business.interfaces.Reservation;
-import dw317.hotel.business.interfaces.Room;
 
 /**
  * Loads and sort the room text file. Loads, merges and sort the Customer text

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package dw317.lib.creditcard;
+package groupLUXURY.lib.creditcard;
 
 /**
  * @author Sebastian, Max, isaak

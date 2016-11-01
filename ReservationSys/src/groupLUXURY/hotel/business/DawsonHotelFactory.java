@@ -1,10 +1,10 @@
 package groupLUXURY.hotel.business;
 
-import dw317.hotel.business.interfaces.Customer;
-import dw317.hotel.business.interfaces.HotelFactory;
-import dw317.hotel.business.interfaces.Reservation;
-import dw317.hotel.business.interfaces.Room;
-import dw317.lib.creditcard.CreditCard;
+import groupLUXURY.hotel.business.interfaces.Customer;
+import groupLUXURY.hotel.business.interfaces.HotelFactory;
+import groupLUXURY.hotel.business.interfaces.Reservation;
+import groupLUXURY.hotel.business.interfaces.Room;
+import groupLUXURY.lib.creditcard.CreditCard;
 
 /**
  * @author Sebastian, Max, Isaak, Kajal

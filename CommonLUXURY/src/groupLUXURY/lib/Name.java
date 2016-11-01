@@ -1,4 +1,4 @@
-package dw317.lib;
+package groupLUXURY.lib;
 import java.io.Serializable;
 
 /**
