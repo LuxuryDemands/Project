@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import groupLUXURY.hotel.business.interfaces.*;
-import groupLUXURY.hotel.data.interfaces.ListPersistenceObject;
+import dw317.hotel.business.interfaces.*;
+import dw317.hotel.data.interfaces.ListPersistenceObject;
 import groupLUXURY.util.ListUtilities;
 
 public class SequentialTextFileList implements ListPersistenceObject {

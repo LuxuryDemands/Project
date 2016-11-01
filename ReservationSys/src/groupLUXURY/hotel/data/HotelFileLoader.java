@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
 
-import groupLUXURY.hotel.business.DawsonHotelFactory;
-import groupLUXURY.hotel.business.interfaces.Customer;
-import groupLUXURY.hotel.business.interfaces.Reservation;
-import groupLUXURY.hotel.business.interfaces.Room;
+import dw317.hotel.business.DawsonHotelFactory;
+import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
+import dw317.hotel.business.interfaces.Room;
 import groupLUXURY.lib.Email;
 import groupLUXURY.lib.creditcard.CreditCard;
 /**

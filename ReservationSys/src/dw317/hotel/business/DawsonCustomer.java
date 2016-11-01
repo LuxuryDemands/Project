@@ -1,11 +1,11 @@
 /**
  * 
  */
-package groupLUXURY.hotel.business;
+package dw317.hotel.business;
 
 import java.util.Optional;
 
-import groupLUXURY.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Customer;
 import groupLUXURY.lib.Email;
 import groupLUXURY.lib.Name;
 import groupLUXURY.lib.creditcard.CreditCard;

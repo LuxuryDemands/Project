@@ -1,8 +1,8 @@
-package groupLUXURY.hotel.data.interfaces;
+package dw317.hotel.data.interfaces;
 
 import java.io.IOException;
 
-import groupLUXURY.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Customer;
 import groupLUXURY.hotel.data.DuplicateCustomerException;
 import groupLUXURY.hotel.data.NonExistingCustomerException;
 import groupLUXURY.lib.Email;

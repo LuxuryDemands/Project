@@ -1,9 +1,9 @@
-package groupLUXURY.hotel.data.interfaces;
+package dw317.hotel.data.interfaces;
 
 import java.io.IOException;
 import java.util.List;
 
-import groupLUXURY.hotel.business.interfaces.*;
+import dw317.hotel.business.interfaces.*;
 
 public interface ListPersistenceObject {
 	/**

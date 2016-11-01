@@ -1,12 +1,12 @@
 /**
  * 
  */
-package groupLUXURY.hotel.data.interfaces;
+package dw317.hotel.data.interfaces;
 
 import java.util.List;
 
-import groupLUXURY.hotel.business.RoomType;
-import groupLUXURY.hotel.business.interfaces.Room;
+import dw317.hotel.business.RoomType;
+import dw317.hotel.business.interfaces.Room;
 
 public interface RoomDAO {
 

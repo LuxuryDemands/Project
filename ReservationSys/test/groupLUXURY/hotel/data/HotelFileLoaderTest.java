@@ -6,9 +6,9 @@ package groupLUXURY.hotel.data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import groupLUXURY.hotel.business.interfaces.Customer;
-import groupLUXURY.hotel.business.interfaces.Reservation;
-import groupLUXURY.hotel.business.interfaces.Room;
+import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
+import dw317.hotel.business.interfaces.Room;
 
 /**
  * Test for the HotelFileLoader methods.

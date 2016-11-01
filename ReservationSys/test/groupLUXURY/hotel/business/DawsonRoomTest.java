@@ -3,6 +3,9 @@
  */
 package groupLUXURY.hotel.business;
 
+import dw317.hotel.business.DawsonRoom;
+import dw317.hotel.business.RoomType;
+
 /**
  * @author Sebastian
  *

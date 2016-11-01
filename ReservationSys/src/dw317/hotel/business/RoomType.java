@@ -1,7 +1,7 @@
 /**
  * 
  */
-package groupLUXURY.hotel.business;
+package dw317.hotel.business;
 
 /**
  * @author Sebastian, Max, Isaak, Kajal

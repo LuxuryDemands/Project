@@ -1,4 +1,4 @@
-package groupLUXURY.hotel.business.interfaces;
+package dw317.hotel.business.interfaces;
 
 import java.io.Serializable;
 

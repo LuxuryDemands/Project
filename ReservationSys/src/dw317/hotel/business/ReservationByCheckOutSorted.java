@@ -1,8 +1,8 @@
-package groupLUXURY.hotel.business;
+package dw317.hotel.business;
 
 import java.util.Comparator;
 
-import groupLUXURY.hotel.business.interfaces.Reservation;
+import dw317.hotel.business.interfaces.Reservation;
 
 /**
  * @author kajal

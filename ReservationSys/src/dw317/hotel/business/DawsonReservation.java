@@ -1,13 +1,13 @@
 /**
  * 
  */
-package groupLUXURY.hotel.business;
+package dw317.hotel.business;
 
 import java.time.LocalDate;
 
-import groupLUXURY.hotel.business.interfaces.Customer;
-import groupLUXURY.hotel.business.interfaces.Reservation;
-import groupLUXURY.hotel.business.interfaces.Room;
+import dw317.hotel.business.interfaces.Customer;
+import dw317.hotel.business.interfaces.Reservation;
+import dw317.hotel.business.interfaces.Room;
 
 /**
  * @author Sebastian, Max, Isaak

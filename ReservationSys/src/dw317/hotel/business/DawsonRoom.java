@@ -1,10 +1,10 @@
 /**
  * 
  */
-package groupLUXURY.hotel.business;
+package dw317.hotel.business;
 
 
-import groupLUXURY.hotel.business.interfaces.Room;
+import dw317.hotel.business.interfaces.Room;
 
 /**
  * @author Sebastian, Max, Isaak

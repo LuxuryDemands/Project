@@ -1,11 +1,11 @@
 /**
  * 
  */
-package groupLUXURY.hotel.business.interfaces;
+package dw317.hotel.business.interfaces;
 
 import java.io.Serializable;
 
-import groupLUXURY.hotel.business.RoomType;
+import dw317.hotel.business.RoomType;
 
 /**
  * @author Sebastian, Max, Isaak, Kajal
