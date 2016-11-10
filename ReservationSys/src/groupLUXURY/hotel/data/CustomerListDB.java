@@ -13,6 +13,7 @@ import dw317.hotel.data.interfaces.CustomerDAO;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import groupLUXURY.lib.Email;
 import groupLUXURY.lib.creditcard.CreditCard;
+import groupLUXURY.util.ListUtilities;
 
 /**
  * @author 1331680
@@ -36,6 +37,9 @@ public class CustomerListDB implements CustomerDAO {
 
 	@Override
 	public void add(Customer cust) throws DuplicateCustomerException {
+		if (!(ListUtilities.binarySearch(this.database,cust.getEmail())==-1)){
+			throw new DuplicateCustomerException("The specified email is already in the database.");
+		}
 		Customer copy = DawsonHotelFactory.DAWSON.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
 				cust.getEmail().toString());
 		if (!(cust.getCreditCard()==null)){
@@ -62,13 +66,4 @@ public class CustomerListDB implements CustomerDAO {
 		// TODO Auto-generated method stub
 
 	}
-	private static boolean checkForDuplicateCustomer(List<Customer> list){
-		List<Customer> copy = list;
-		for (int i=0;i<list.size();i++){
-			if (list.get(i)==copy.get(i)){
-				return true;
-			}
-		}
-	}
-
 }
