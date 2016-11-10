@@ -38,6 +38,9 @@ public class CustomerListDB implements CustomerDAO {
 	public void add(Customer cust) throws DuplicateCustomerException {
 		Customer copy = DawsonHotelFactory.DAWSON.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
 				cust.getEmail().toString());
+		if (!(cust.getCreditCard()==null)){
+			copy.setCreditCard(cust.getCreditCard());
+		}
 		
 
 	}
@@ -58,6 +61,14 @@ public class CustomerListDB implements CustomerDAO {
 	public void update(Email email, CreditCard card) throws NonExistingCustomerException {
 		// TODO Auto-generated method stub
 
+	}
+	private static boolean checkForDuplicateCustomer(List<Customer> list){
+		List<Customer> copy = list;
+		for (int i=0;i<list.size();i++){
+			if (list.get(i)==copy.get(i)){
+				return true;
+			}
+		}
 	}
 
 }
