@@ -15,4 +15,5 @@ public interface Reservation extends Serializable, Comparable<Reservation>  {
 	LocalDate getCheckInDate();
 	LocalDate getCheckOutDate();
 	int getNumberOfDays();
+	boolean overlap(Reservation other);
 }
