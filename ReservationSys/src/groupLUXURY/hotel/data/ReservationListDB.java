@@ -46,7 +46,6 @@ public class ReservationListDB implements ReservationDAO {
 	{
 		// TODO Auto-generated method stub
 		//binary search
-		overlap
 		
 	}
 
