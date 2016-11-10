@@ -44,8 +44,11 @@ public class ReservationListDB implements ReservationDAO {
 	@Override
 	public void add(Reservation reserv) throws DuplicateReservationException 
 	{
-		// TODO Auto-generated method stub
-		//binary search
+		//check if the reservation overlaps with an existing one.
+		if(this.database.get(0).overlap(reserv))
+			throw new DuplicateReservationException();
+		else
+		{}
 		
 	}
 
