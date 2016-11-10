@@ -154,7 +154,23 @@ public class DawsonReservation implements Reservation {
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
-
+	/**
+	 * Checks whether two reservations overlap
+	 * 
+	 * @param other
+	 * @return boolean Returning if the reservations overlap
+	 */
+	public boolean overlap(Reservation other)
+	{
+		if ( this.getRoom()==other.getRoom() )
+		{
+			if (this.getCheckInDate().isBefore(other.getCheckOutDate())
+					||
+					this.getCheckOutDate().isAfter(other.getCheckInDate()))
+				return true;
+		}
+		return false;		
+	}
 	@Override
 	public final int hashCode() {
 		final int prime = 31;
