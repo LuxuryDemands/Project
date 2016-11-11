@@ -12,6 +12,7 @@ import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.hotel.data.interfaces.ReservationDAO;
+import groupLUXURY.util.ListUtilities;
 
 public class ReservationListDB implements ReservationDAO {
 
@@ -56,7 +57,9 @@ public class ReservationListDB implements ReservationDAO {
 		for (int i=0; i<database.size(); i++)
 		{
 			if(this.database.get(i).overlap(reserv)) 	//check if the reservation overlaps with an existing one.
+			{System.out.println("org");
 				throw new DuplicateReservationException();
+			}
 		}
 		Reservation copyReserv = factory.getReservationInstance(
 				reserv.getCustomer(), 
@@ -93,8 +96,11 @@ public class ReservationListDB implements ReservationDAO {
 	}
 
 	@Override
-	public void disconnect() throws IOException {
-		// TODO Auto-generated method stub
+	public void disconnect() throws IOException 
+	{
+		ListUtilities.saveListToTextFile(database, "datafiles/database/reservations.txt");
+
+		database=null;
 	}
 
 	@Override

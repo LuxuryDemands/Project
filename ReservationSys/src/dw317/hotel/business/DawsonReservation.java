@@ -162,7 +162,7 @@ public class DawsonReservation implements Reservation {
 	 */
 	public boolean overlap(Reservation other)
 	{
-		if ( this.getRoom()==other.getRoom() )
+		if ( this.getRoom().getRoomNumber()==other.getRoom().getRoomNumber() )
 		{
 			if (this.getCheckInDate().isBefore(other.getCheckOutDate())
 					||
