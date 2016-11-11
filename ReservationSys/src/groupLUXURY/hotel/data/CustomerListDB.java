@@ -87,6 +87,8 @@ public class CustomerListDB implements CustomerDAO {
 //		if (ListUtilities.binarySearch(this.database,email)==-1){
 //			
 //		}
+		Customer c = DawsonHotelFactory.DAWSON.getCustomerInstance("", "", email.toString());
+		
 		return null;
 	}
 
