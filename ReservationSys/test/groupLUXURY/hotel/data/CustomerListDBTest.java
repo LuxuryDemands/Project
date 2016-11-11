@@ -6,6 +6,7 @@ package groupLUXURY.hotel.data;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import dw317.hotel.business.DawsonHotelFactory;
 import dw317.hotel.business.RoomType;
@@ -72,8 +73,8 @@ public class CustomerListDBTest {
 		//"raj@aing.ru*Raj*Wong*visa*4556737586899855"
 		Customer dup = DawsonHotelFactory.DAWSON.getCustomerInstance("Raj", "Wong","raj@aing.ru");
 		CreditCard card = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
-		dup.setCreditCard(card);
-		db.add(cust);
+		dup.setCreditCard(Optional.of(card));
+		//db.add(cust);
 	}
 
 	private static void testGetCustomers() {
