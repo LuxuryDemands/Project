@@ -23,9 +23,11 @@ public class CustomerListDBTest {
 
 	/**
 	 * @param args
+	 * @throws DuplicateCustomerException 
 	 */
-	public static void main(String[] args) {
-		testGetCustomers();
+	public static void main(String[] args) throws DuplicateCustomerException {
+		//testGetCustomers();
+		testAddCustomer();
 	}
 	//joe.mancini@mail.me*Joe*Mancini**"
 	private static void setup() {
@@ -64,17 +66,23 @@ public class CustomerListDBTest {
 			theFile.delete();
 		}
 	}
-	private static void testAddCustomer(){
+	private static void testAddCustomer() throws DuplicateCustomerException{
 		setup();
 		SequentialTextFileList file = new SequentialTextFileList
 				("testfiles/testRooms.txt", "testfiles/testCustomers.txt",
 						"testfiles/testReservations.txt");
 		CustomerListDB db = new CustomerListDB(file);
-		//"raj@aing.ru*Raj*Wong*visa*4556737586899855"
-		Customer dup = DawsonHotelFactory.DAWSON.getCustomerInstance("Raj", "Wong","raj@aing.ru");
-		CreditCard card = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
-		dup.setCreditCard(Optional.of(card));
-		//db.add(cust);
+//		Customer dup = DawsonHotelFactory.DAWSON.getCustomerInstance("Raj2", "Wong2","raj@aing.ru");
+//		CreditCard card = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
+//		dup.setCreditCard(Optional.of(card));
+		Customer newCust = DawsonHotelFactory.DAWSON.getCustomerInstance("Sebastian", "Ramirez","abc@zxcv.com");
+		CreditCard card2 = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
+		newCust.setCreditCard(Optional.of(card2));
+		db.add(newCust);
+		for (Customer c: db.database){
+			System.out.println(c);
+		}
+		teardown();
 	}
 
 	private static void testGetCustomers() {

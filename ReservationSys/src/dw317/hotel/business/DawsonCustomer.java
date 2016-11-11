@@ -21,7 +21,7 @@ public class DawsonCustomer implements Customer {
 	private static final long serialVersionUID = 42031768871L;
 	protected Name name;
 	protected final Email email;
-	protected Optional<CreditCard> creditCard;
+	protected CreditCard creditCard;
 
 	/**
 	 * DawsonCustomer constructor with 3 params. Sets all the new instances of
@@ -86,7 +86,7 @@ public class DawsonCustomer implements Customer {
 
 	@Override
 	public Optional<CreditCard> getCreditCard() {
-		return this.creditCard;
+		return Optional.of(this.creditCard);
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class DawsonCustomer implements Customer {
 
 	@Override
 	public void setCreditCard(Optional<CreditCard> card) {
-		this.creditCard = card;
+		this.creditCard =  card.orElse(null);
 	}
 
 	/*

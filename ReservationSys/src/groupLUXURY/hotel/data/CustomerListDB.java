@@ -38,47 +38,55 @@ public class CustomerListDB implements CustomerDAO {
 
 	@Override
 	public void add(Customer cust) throws DuplicateCustomerException {
-		if (!(ListUtilities.binarySearch(this.database, cust)==-1)){
+		if (!(ListUtilities.binarySearch(this.database,cust)==-1)){
 			throw new DuplicateCustomerException("The specified email is already in the database.");
 		}
-		Customer copy = DawsonHotelFactory.DAWSON.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
-				cust.getEmail().toString());
-		if (!(cust.getCreditCard()==null)){
-			copy.setCreditCard(cust.getCreditCard());
+		else{
+			Customer copy = DawsonHotelFactory.DAWSON.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
+					cust.getEmail().toString());
+			if (!(cust.getCreditCard()==null)){
+				copy.setCreditCard(cust.getCreditCard());
+			}
+			int index = binarySearch(copy);
+			this.database.add(-(index+1),copy);
 		}
-		int index = binarySearch(this.database,cust);
-		this.database.add(index,cust);
+		
 	}
 
-	private static int binarySearch(List<Customer> list, Customer key) {
+	private int binarySearch(Customer key) {
 
 		int low = 0;
-		int high = list.size() - 1;
-		int mid = low + (high - low) / 2;
+		int high = this.database.size() - 1;
+		int mid = 0;
+				
 		while (low <= high) {
-			
-			if (list.get(mid).compareTo(key) < 0) {
+			mid = (high+low)/2;
+			if (this.database.get(mid).compareTo(key) < 0) {
 				low = mid + 1;
-				mid = (low+high)/2;
 			}
-			else if (list.get(mid).compareTo(key) > 0) {
+			else if (this.database.get(mid).compareTo(key) > 0) {
 				high = mid - 1;
-				mid = (low+high)/2;
 			}
+			else if (this.database.get(mid).compareTo(key)==0){
+				return -1;
+			}
+			
 		}
-		return mid;
-	}
-
+		return -(low-1);
+}
+	
 	@Override
 	public void disconnect() throws IOException {
-		ListUtilities.saveListToTextFile(database, "datafiles/database/savedToDisk");
+		listPersistenceObject.saveCustomerDatabase(this.database);
 		this.database=null;
 
 	}
 
 	@Override
 	public Customer getCustomer(Email email) throws NonExistingCustomerException {
-		// TODO Auto-generated method stub
+//		if (ListUtilities.binarySearch(this.database,email)==-1){
+//			
+//		}
 		return null;
 	}
 
