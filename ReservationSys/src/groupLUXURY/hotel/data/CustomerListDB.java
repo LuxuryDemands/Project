@@ -38,7 +38,7 @@ public class CustomerListDB implements CustomerDAO {
 
 	@Override
 	public void add(Customer cust) throws DuplicateCustomerException {
-		if (!(ListUtilities.binarySearch(this.database,cust)==-1)){
+		if ((binarySearch(cust)==-1)){
 			throw new DuplicateCustomerException("The specified email is already in the database.");
 		}
 		else{
@@ -72,7 +72,7 @@ public class CustomerListDB implements CustomerDAO {
 			}
 			
 		}
-		return -(low-1);
+		return -(low+1);
 }
 	
 	@Override
