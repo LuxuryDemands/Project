@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import dw317.hotel.business.DawsonHotelFactory;
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
@@ -24,7 +25,7 @@ public class ReservationListDB implements ReservationDAO {
 		this.listPersistenceObject = listPersistenceObject;
 		this.database = this.listPersistenceObject.getReservationDatabase();
 		this.allRooms = listPersistenceObject.getRoomDatabase();
-		this.factory = null;
+		this.factory = DawsonHotelFactory.DAWSON;
 	
 	}
 	
@@ -112,14 +113,14 @@ public class ReservationListDB implements ReservationDAO {
 
 	@Override
 	public String toString() {
-		String total ="Number of reservations in database: " + database.size();
+		StringBuilder total = new StringBuilder("Number of reservations in database: " + database.size());
 		
 		for (int i=0; i<database.size(); i++)
 		{
-			total += "\n" + database.get(i);
+			total.append( "\n" + database.get(i));
 		}
 		
-		return total;
+		return total.toString();
 		//return "ReservationListDB [database=" + database + ", allRooms=" + allRooms + ", listPersistenceObject="
 		//		+ listPersistenceObject + ", factory=" + factory + "]";
 	}

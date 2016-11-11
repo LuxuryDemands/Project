@@ -132,6 +132,20 @@ public class ListUtilities {
 		}
 		print.close();
 	}
+	public static<E> void saveListToTextFile(List<E> list, String path) throws FileNotFoundException {
+		if (list == null) {
+			throw new NullPointerException("The list cannot be null");
+		}
+		if (checkNull(list)) {
+			throw new IllegalArgumentException("The list is not full to capacity");
+		}
+		File file = new File(path);
+		PrintWriter print = new PrintWriter(file);
+		for (int i = 0; i < list.size(); i++) {
+			print.println(list.get(i));
+		}
+		print.close();
+	}
 
 	/**
 	 * Sorts a list of objects in ascending natural order using * selection
@@ -183,6 +197,14 @@ public class ListUtilities {
 	private static boolean checkNull(Object[] list) {
 		for (int i = 0; i < list.length; i++) {
 			if (list[i] == null) {
+				return true;
+			}
+		}
+		return false;
+	}
+	private static<E> boolean checkNull(List<E> list) {
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i) == null) {
 				return true;
 			}
 		}

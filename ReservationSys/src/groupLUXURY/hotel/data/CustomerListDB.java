@@ -20,13 +20,14 @@ import groupLUXURY.util.ListUtilities;
  *
  */
 public class CustomerListDB implements CustomerDAO {
-	private List<Customer> database;
+	public List<Customer> database;
 	private final ListPersistenceObject listPersistenceObject;
 	private final HotelFactory factory;
 
 	public CustomerListDB(ListPersistenceObject listPersistenceObject) {
 		this.listPersistenceObject = listPersistenceObject;
 		this.database = this.listPersistenceObject.getCustomerDatabase();
+		this.factory=DawsonHotelFactory.DAWSON;
 	}
 
 	public CustomerListDB(ListPersistenceObject listPersistenceObject, HotelFactory factory) {
@@ -37,7 +38,7 @@ public class CustomerListDB implements CustomerDAO {
 
 	@Override
 	public void add(Customer cust) throws DuplicateCustomerException {
-		if (!(ListUtilities.binarySearch(this.database,cust.getEmail())==-1)){
+		if (!(ListUtilities.binarySearch(this.database, cust)==-1)){
 			throw new DuplicateCustomerException("The specified email is already in the database.");
 		}
 		Customer copy = DawsonHotelFactory.DAWSON.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
@@ -45,13 +46,33 @@ public class CustomerListDB implements CustomerDAO {
 		if (!(cust.getCreditCard()==null)){
 			copy.setCreditCard(cust.getCreditCard());
 		}
-		
+		int index = binarySearch(this.database,cust);
+		this.database.add(index,cust);
+	}
 
+	private static int binarySearch(List<Customer> list, Customer key) {
+
+		int low = 0;
+		int high = list.size() - 1;
+		int mid = low + (high - low) / 2;
+		while (low <= high) {
+			
+			if (list.get(mid).compareTo(key) < 0) {
+				low = mid + 1;
+				mid = (low+high)/2;
+			}
+			else if (list.get(mid).compareTo(key) > 0) {
+				high = mid - 1;
+				mid = (low+high)/2;
+			}
+		}
+		return mid;
 	}
 
 	@Override
 	public void disconnect() throws IOException {
-		// TODO Auto-generated method stub
+		ListUtilities.saveListToTextFile(database, "datafiles/database/savedToDisk");
+		this.database=null;
 
 	}
 
@@ -65,5 +86,14 @@ public class CustomerListDB implements CustomerDAO {
 	public void update(Email email, CreditCard card) throws NonExistingCustomerException {
 		// TODO Auto-generated method stub
 
+	}
+	public String toString() {
+		StringBuilder total = new StringBuilder("Number of reservations in database: " + database.size());
+		
+		for (int i=0; i<database.size(); i++)
+		{
+			total.append( "\n" + database.get(i));
+		}
+		return total.toString();
 	}
 }

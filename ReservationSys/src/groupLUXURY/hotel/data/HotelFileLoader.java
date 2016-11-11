@@ -12,6 +12,7 @@ import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import groupLUXURY.lib.Email;
 import groupLUXURY.lib.creditcard.CreditCard;
+import groupLUXURY.util.ListUtilities;
 /**
  * This class compasses methods to get object lists from sequential text files.
  * 
@@ -50,6 +51,7 @@ public class HotelFileLoader {
 			}
 		}
 		roomListScanner.close();
+		ListUtilities.sort(roomListArray);
 		return roomListArray;
 	}
 
@@ -89,6 +91,7 @@ public class HotelFileLoader {
 			}
 		}
 		customerListScanner.close();
+		ListUtilities.sort(customerListArray);
 		return customerListArray;
 	}
 
@@ -148,6 +151,7 @@ public class HotelFileLoader {
 					Integer.parseInt(separatedItems[5]), Integer.parseInt(separatedItems[6]));
 		}
 		reservationListScanner.close();
+		ListUtilities.sort(reservationListArray);
 		return reservationListArray;
 	}
 	/**
