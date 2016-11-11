@@ -39,17 +39,34 @@ public class ReservationListDB implements ReservationDAO {
 	
 	
 	
+	/***
+	 * 
+	 * Checks if the reservation overlaps with an existing reservation.
+	 * If the reservation does not overlap, 
+	 *  adds a reference to a copy of the object referenced by the reserv 
+	 *   
+	 *  
 	
+	 */
 	
 	@Override
 	public void add(Reservation reserv) throws DuplicateReservationException 
 	{
-		//check if the reservation overlaps with an existing one.
-		if(this.database.get(0).overlap(reserv))
-			throw new DuplicateReservationException();
-		else
-		{}
-		
+		for (int i=0; i<database.size(); i++)
+		{
+			//check if the reservation overlaps with an existing one.
+			if(this.database.get(i).overlap(reserv)) 
+				throw new DuplicateReservationException();
+		}
+		Reservation copyReserv = factory.getReservationInstance(reserv.getCustomer(), reserv.getRoom(), 
+		reserv.getCheckInDate().getMonthValue(), reserv.getCheckInDate().getDayOfMonth(), reserv.getCheckInDate().getYear(), 
+		reserv.getCheckOutDate().getMonthValue(), reserv.getCheckOutDate().getDayOfMonth(), reserv.getCheckOutDate().getYear());
+
+		database.add(copyReserv);
+		// *  Note that the reservation must be added in correct order to keep the database in sorted order.
+		// *   Implement a binary search private method to help. 
+		// *   In your test class, verify that add works by invoking toString.
+
 	}
 
 	@Override
