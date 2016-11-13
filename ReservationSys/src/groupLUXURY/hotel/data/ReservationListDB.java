@@ -112,7 +112,7 @@ public class ReservationListDB implements ReservationDAO {
 			this.database.remove(index);
 		}
 		else{
-			throw new NonExistingReservationException("No such reservation was found in the database");
+			throw new NonExistingReservationException("No such reservation was found in the database.");
 		}
 	}
 
@@ -136,7 +136,11 @@ public class ReservationListDB implements ReservationDAO {
 
 	@Override
 	public void clearAllPast() {
-		// TODO Auto-generated method stub
+		for (int i=0;i<this.database.size();i++){
+			if (this.database.get(i).getCheckOutDate().compareTo(LocalDate.now())<0){
+				this.database.remove(i);
+			}
+		}
 
 	}
 
