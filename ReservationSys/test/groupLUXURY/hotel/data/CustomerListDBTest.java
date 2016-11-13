@@ -75,17 +75,17 @@ public class CustomerListDBTest {
 //		Customer dup = DawsonHotelFactory.DAWSON.getCustomerInstance("Raj2", "Wong2","raj@aing.ru");
 //		CreditCard card = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
 //		dup.setCreditCard(Optional.of(card));
-		Customer newCust = DawsonHotelFactory.DAWSON.getCustomerInstance("Sebastian", "Ramirez","abc@zxcv.com");
+		Customer newCust = DawsonHotelFactory.DAWSON.getCustomerInstance("Sebastian", "Ramirez","zzz@123.com");
 		CreditCard card2 = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
 		newCust.setCreditCard(Optional.of(card2));
 		
 
-		Customer newCust2 = DawsonHotelFactory.DAWSON.getCustomerInstance("Sebastian2", "Ramirez2","abc2@zxcv.com");
-		CreditCard card22 = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
-		newCust2.setCreditCard(Optional.of(card22));
+//		Customer newCust2 = DawsonHotelFactory.DAWSON.getCustomerInstance("Sebastian", "Ramirez","abc@zxcv.com");
+//		CreditCard card22 = DawsonHotelFactory.DAWSON.getCard("visa", "4556737586899855");
+//		newCust2.setCreditCard(Optional.of(card22));
 
 		db.add(newCust);
-		db.add(newCust2);
+//		db.add(newCust2);
 		
 		
 		for (Customer c: db.database){
