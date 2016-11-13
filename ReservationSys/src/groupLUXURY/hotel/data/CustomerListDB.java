@@ -5,7 +5,7 @@ package groupLUXURY.hotel.data;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.Optional;
 import dw317.hotel.business.DawsonHotelFactory;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.HotelFactory;
@@ -13,7 +13,6 @@ import dw317.hotel.data.interfaces.CustomerDAO;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import groupLUXURY.lib.Email;
 import groupLUXURY.lib.creditcard.CreditCard;
-import groupLUXURY.util.ListUtilities;
 
 /**
  * @author 1331680
@@ -38,21 +37,20 @@ public class CustomerListDB implements CustomerDAO {
 
 	@Override
 	public void add(Customer cust) throws DuplicateCustomerException {
-		if ((binarySearch(cust)==-1)){
+		int index=binarySearch(cust);
+		if (index>0){
 			throw new DuplicateCustomerException("The specified email is already in the database.");
 		}
 		else{
-			Customer copy = DawsonHotelFactory.DAWSON.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
+			Customer copy = this.factory.getCustomerInstance(cust.getName().getFirstName(), cust.getName().getLastName(),
 					cust.getEmail().toString());
 			if (!(cust.getCreditCard()==null)){
 				copy.setCreditCard(cust.getCreditCard());
 			}
-			int index = binarySearch(copy);
 			this.database.add(-(index+1),copy);
 		}
 		
 	}
-
 	private int binarySearch(Customer key) {
 
 		int low = 0;
@@ -68,7 +66,7 @@ public class CustomerListDB implements CustomerDAO {
 				high = mid - 1;
 			}
 			else if (this.database.get(mid).compareTo(key)==0){
-				return -1;
+				return mid;
 			}
 			
 		}
@@ -84,23 +82,33 @@ public class CustomerListDB implements CustomerDAO {
 
 	@Override
 	public Customer getCustomer(Email email) throws NonExistingCustomerException {
-//		if (ListUtilities.binarySearch(this.database,email)==-1){
-//			
-//		}
-		Customer c = DawsonHotelFactory.DAWSON.getCustomerInstance("", "", email.toString());
-		
-		return null;
+		Customer cust = this.factory.getCustomerInstance("", "", email.toString());
+		int index = binarySearch(cust);
+		if (index<0){
+			throw new NonExistingCustomerException("The specified customer does not exist.");
+		}
+		else{
+			cust = this.database.get(index);
+		}
+		return cust;
 	}
 
 	@Override
 	public void update(Email email, CreditCard card) throws NonExistingCustomerException {
-		// TODO Auto-generated method stub
+		Customer cust = this.factory.getCustomerInstance("", "", email.toString());
+		int index = binarySearch(cust);
+		if (index<0){
+			throw new NonExistingCustomerException("The specified customer does not exist");
+		}
+		else{
+			this.database.get(index).setCreditCard(Optional.of(card));
+		}
 
 	}
 	public String toString() {
-		StringBuilder total = new StringBuilder("Number of reservations in database: " + database.size());
+		StringBuilder total = new StringBuilder("Number of reservations in database: " + this.database.size());
 		
-		for (int i=0; i<database.size(); i++)
+		for (int i=0; i<this.database.size(); i++)
 		{
 			total.append( "\n" + database.get(i));
 		}
