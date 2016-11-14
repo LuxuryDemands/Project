@@ -2,7 +2,6 @@ package groupLUXURY.hotel.data;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import dw317.hotel.business.DawsonHotelFactory;
@@ -30,90 +29,90 @@ public class ReservationListDB implements ReservationDAO {
 		this.factory = DawsonHotelFactory.DAWSON;
 	
 	}
+	
 	public ReservationListDB(ListPersistenceObject listPersistenceObject, HotelFactory factory) {
 		this.listPersistenceObject = listPersistenceObject;
 		this.database = this.listPersistenceObject.getReservationDatabase();
 		this.allRooms = listPersistenceObject.getRoomDatabase();
 		this.factory = factory;
 	}
+	
+	
+	
+	
+	
+	/***
+	 * 
+	 * Checks if the reservation overlaps with an existing reservation.
+	 * If the reservation does not overlap, 
+	 *  adds a reference to a copy of the object referenced by the reserv 
+	 *   
+	 *  
+	
+	 */
+	
 	@Override
 	public void add(Reservation reserv) throws DuplicateReservationException 
 	{
-		int index = binarySearch(reserv);
-		if (index>0){
-			throw new DuplicateReservationException("The specified reservation already exists");
+		for (int i=0; i<database.size(); i++)
+		{
+			if(this.database.get(i).overlap(reserv)) 	//check if the reservation overlaps with an existing one.
+			{System.out.println("org");
+				throw new DuplicateReservationException();
+			}
 		}
-		else if(index==-99999){
-			throw new DuplicateReservationException("The specified reservation overlaps with another reservation");
-		}
-		else{
-			Reservation copyReserv = factory.getReservationInstance(
-					reserv.getCustomer(), 
-					reserv.getRoom(), 
-					reserv.getCheckInDate().getYear(), 
-					reserv.getCheckInDate().getMonthValue(),
-					reserv.getCheckInDate().getDayOfMonth(), 
-					reserv.getCheckOutDate().getYear(),
-					reserv.getCheckOutDate().getMonthValue(),
-					reserv.getCheckOutDate().getDayOfMonth() );
-			this.database.add(-(index+1),copyReserv);
-		}
-	}
-	private int binarySearch(Reservation key) {
+		Reservation copyReserv = factory.getReservationInstance(
+				reserv.getCustomer(), 
+				reserv.getRoom(), 
+				reserv.getCheckInDate().getYear(), 
+				reserv.getCheckInDate().getMonthValue(),
+				reserv.getCheckInDate().getDayOfMonth(), 
+				reserv.getCheckOutDate().getYear(),
+				reserv.getCheckOutDate().getMonthValue(),
+				reserv.getCheckOutDate().getDayOfMonth() );
 
+		int index = binarySearch(copyReserv);
+		database.add(index, copyReserv);
+	}
+	
+	private int binarySearch(Reservation keyReserv)
+	{
 		int low = 0;
-		int high = this.database.size() - 1;
+		int high = database.size()-1;
 		int mid = 0;
-				
-		while (low <= high) {
-			mid = (high+low)/2;
-			if (this.database.get(mid).compareTo(key) < 0) {
-				if (this.database.get(mid).overlap(key)){
-					return -99999;
-				}
-				low = mid + 1;
+		while (low <= high)
+		{
+			mid = (low+high)/2;
+			if (database.get(mid).compareTo(keyReserv) >0)// copy is smaller
+			{
+				high = mid-1;
 			}
-			else if (this.database.get(mid).compareTo(key) > 0) {
-				if (this.database.get(mid).overlap(key)){
-					return -99999;
-				}
-				high = mid - 1;
+			else if (database.get(mid).compareTo(keyReserv) <0) //copy is bigger
+			{
+				low = mid+1;
 			}
-			else if (this.database.get(mid).compareTo(key)==0){
-				return mid;
-			}
-			
 		}
-		return -(low+1);
-}
+		return low;
+	}
 
 	@Override
 	public void disconnect() throws IOException 
 	{
-		listPersistenceObject.saveReservationDatabase(this.database);
-		this.database=null;
+		ListUtilities.saveListToTextFile(database, "datafiles/database/reservations.txt");
+
+		database=null;
 	}
 
 	@Override
 	public List<Reservation> getReservations(Customer cust) {
-		List<Reservation> reservations = new ArrayList<>();
-		for (Reservation r: this.database){
-			if (r.getCustomer().equals(cust)){
-				reservations.add(r);
-			}
-		}
-		return reservations;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void cancel(Reservation reserv) throws NonExistingReservationException {
-		int index = binarySearch(reserv);
-		if (index>0){
-			this.database.remove(index);
-		}
-		else{
-			throw new NonExistingReservationException("No such reservation was found in the database.");
-		}
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -136,11 +135,7 @@ public class ReservationListDB implements ReservationDAO {
 
 	@Override
 	public void clearAllPast() {
-		for (int i=0;i<this.database.size();i++){
-			if (this.database.get(i).getCheckOutDate().compareTo(LocalDate.now())<0){
-				this.database.remove(i);
-			}
-		}
+		// TODO Auto-generated method stub
 
 	}
 
@@ -154,6 +149,8 @@ public class ReservationListDB implements ReservationDAO {
 		}
 		
 		return total.toString();
+		//return "ReservationListDB [database=" + database + ", allRooms=" + allRooms + ", listPersistenceObject="
+		//		+ listPersistenceObject + ", factory=" + factory + "]";
 	}
 
 }
