@@ -22,9 +22,9 @@ public class ReservationListDBTest {
 	{
 		
 		
-		String roomFilename="datafiles/database/rooms.txt";
-		String customerFilename="datafiles/database/customers.txt";
-		String reservationFilename="datafiles/database/reservations.txt";		
+		String roomFilename="datafiles/database/roomsTest.txt";
+		String customerFilename="datafiles/database/customersTest.txt";
+		String reservationFilename="datafiles/database/reservationsTest.txt";		
 		SequentialTextFileList myList = new SequentialTextFileList(roomFilename,customerFilename,reservationFilename);
 		ReservationListDB myDB = new ReservationListDB(myList);
 
@@ -41,7 +41,7 @@ public class ReservationListDBTest {
 		//test3
 		
 		   //disconnect
-			try {
+			/*try {
 				testDisconnect(myDB);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -54,7 +54,7 @@ public class ReservationListDBTest {
 
 			System.out.println("\n>>>reconnected!\n");
 			testToString(myDB);
-			
+			*/
 		
 	}
 		
@@ -67,8 +67,8 @@ public class ReservationListDBTest {
 	public static void testBinarySearch(ReservationListDB myDB) // binary search test
 	{
 		DawsonRoom room = new DawsonRoom(801, RoomType.PENTHOUSE);
-		DawsonCustomer cust = new DawsonCustomer("fnam","lnam","homerSimpson@gmail.com"); 
-		DawsonReservation reserv = new DawsonReservation(cust, room, 2017,10,05,2017,11,06);
+		DawsonCustomer cust = new DawsonCustomer("fnam","lnam","homerSimpson2@gmail.com"); 
+		DawsonReservation reserv = new DawsonReservation(cust, room, 2018,10,05,2018,11,06);
 
 		System.out.println("adding new reservation: " + reserv);
 			
@@ -78,7 +78,7 @@ public class ReservationListDBTest {
 		}
 		catch( DuplicateReservationException d)
 		{
-			System.out.println("Room duplicate!");
+			System.out.println("Reservation duplicate!");
 		}
 	
 		System.out.println(myDB.toString());	
