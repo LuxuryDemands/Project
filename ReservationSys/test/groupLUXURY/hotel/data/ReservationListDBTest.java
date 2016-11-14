@@ -36,7 +36,7 @@ public class ReservationListDBTest {
 		testBinarySearch(myDB);
 		
 		
-		
+		/*
 		
 		//test3
 		
@@ -54,7 +54,7 @@ public class ReservationListDBTest {
 
 			System.out.println("\n>>>reconnected!\n");
 			testToString(myDB);
-			
+			*/
 		
 	}
 		

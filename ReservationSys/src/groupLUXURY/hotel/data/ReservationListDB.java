@@ -57,7 +57,7 @@ public class ReservationListDB implements ReservationDAO {
 		for (int i=0; i<database.size(); i++)
 		{
 			if(this.database.get(i).overlap(reserv)) 	//check if the reservation overlaps with an existing one.
-			{System.out.println("org");
+			{	
 				throw new DuplicateReservationException();
 			}
 		}
