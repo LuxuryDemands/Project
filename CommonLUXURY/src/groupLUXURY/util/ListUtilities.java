@@ -70,21 +70,21 @@ public class ListUtilities {
 		}
 		FileWriter fw = new FileWriter(duplicateFilename, true);
 		BufferedWriter bw = new BufferedWriter(fw);
-		PrintWriter b = new PrintWriter(bw);
+		PrintWriter duplicateWriter = new PrintWriter(bw);
 		Comparable[] list3 = (Comparable[]) Array.newInstance(list1.getClass().getComponentType(),
 				(list1.length + list2.length) - countDuplicates(list1, list2));
 		int indexOfList3 = 0;
-		for (int i = 0; i < list1.length; i++) {
-			for (int j = 0; j < list2.length; j++) {
-				if (list1[i].equals(list2[j])) {
-					b.println(list1[i].toString() + "(merged)");
-					b.println(list2[j].toString());
-					b.println("PREVIOUS MERGE BEFORE");
-					list2[j] = null;
+		for (int indexOfList1 = 0; indexOfList1 < list1.length; indexOfList1++) {
+			for (int indexOfList2 = 0; indexOfList2 < list2.length; indexOfList2++) {
+				if (list1[indexOfList1].equals(list2[indexOfList2])) {
+					duplicateWriter.println(list1[indexOfList1].toString() + "(merged)");
+					duplicateWriter.println(list2[indexOfList2].toString());
+					duplicateWriter.println("PREVIOUS MERGE BEFORE");
+					list2[indexOfList2] = null;
 				}
 			}
-			list3[i] = list1[i];
-			indexOfList3 = i;
+			list3[indexOfList1] = list1[indexOfList1];
+			indexOfList3 = indexOfList1;
 		}
 		indexOfList3++;
 		for (int k = 0; k < list2.length; k++) {
@@ -93,9 +93,9 @@ public class ListUtilities {
 				indexOfList3++;
 			}
 		}
-		b.close();
-		Comparable[] toReturn = list3;
-		return toReturn;
+		duplicateWriter.close();
+		sort(list3);
+		return list3;
 	}
 
 	/**
@@ -125,26 +125,21 @@ public class ListUtilities {
 		if (checkNull(list)) {
 			throw new IllegalArgumentException("The list is not full to capacity");
 		}
+		try{
 		File file = new File(path);
 		PrintWriter print = new PrintWriter(file);
 		for (int i = 0; i < list.length; i++) {
 			print.println(list[i]);
 		}
 		print.close();
-	}
-	public static<E> void saveListToTextFile(List<E> list, String path) throws FileNotFoundException {
-		if (list == null) {
-			throw new NullPointerException("The list cannot be null");
 		}
-		if (checkNull(list)) {
-			throw new IllegalArgumentException("The list is not full to capacity");
+		catch(FileNotFoundException e){
+			System.out.println("The specified path does not refer to a file.");
 		}
-		File file = new File(path);
-		PrintWriter print = new PrintWriter(file);
-		for (int i = 0; i < list.size(); i++) {
-			print.println(list.get(i));
+		finally{
+			
 		}
-		print.close();
+		
 	}
 
 	/**
@@ -202,15 +197,6 @@ public class ListUtilities {
 		}
 		return false;
 	}
-	private static<E> boolean checkNull(List<E> list) {
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i) == null) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	/**
 	 * Counts the number of duplicates between two lists.
 	 * 
