@@ -96,9 +96,9 @@ public class ReservationListDB implements ReservationDAO {
 	}
 
 	@Override
-	public void disconnect() throws IOException 
+	public void disconnect(String fileName) throws IOException 
 	{
-		ListUtilities.saveListToTextFile(database, "datafiles/database/reservations.txt");
+		ListUtilities.saveListToTextFile(database, fileName);
 
 		database=null;
 	}
