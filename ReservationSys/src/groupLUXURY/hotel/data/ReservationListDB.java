@@ -14,7 +14,6 @@ import dw317.hotel.business.interfaces.Reservation;
 import dw317.hotel.business.interfaces.Room;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.hotel.data.interfaces.ReservationDAO;
-import groupLUXURY.util.ListUtilities;
 
 public class ReservationListDB implements ReservationDAO {
 
