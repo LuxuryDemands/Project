@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import dw317.hotel.business.DawsonHotelFactory;
 import dw317.hotel.business.RoomType;
 import dw317.hotel.business.interfaces.Customer;
@@ -15,6 +14,12 @@ import dw317.hotel.business.interfaces.Room;
 import dw317.hotel.data.interfaces.ListPersistenceObject;
 import dw317.hotel.data.interfaces.ReservationDAO;
 
+/**
+ * Concrete class that provides ReservationDAO functionality
+ * 
+ * @author Sebastian, Max, Isaak, Kajal
+ *
+ */
 public class ReservationListDB implements ReservationDAO {
 
         private List<Reservation> database;
@@ -22,6 +27,11 @@ public class ReservationListDB implements ReservationDAO {
         private final ListPersistenceObject listPersistenceObject;
         private final HotelFactory factory;
 
+        /**
+         * Constructor requires a ListPersistenceObject to read from file.
+         * 
+         * @param listPersistenceObject
+         */
         public ReservationListDB(ListPersistenceObject listPersistenceObject) {
                 this.listPersistenceObject = listPersistenceObject;
                 this.database = this.listPersistenceObject.getReservationDatabase();
@@ -29,6 +39,15 @@ public class ReservationListDB implements ReservationDAO {
                 this.factory = DawsonHotelFactory.DAWSON;
 
         }
+
+        /**
+         * Constructor requires a ListPersistenceObject to read from file and a
+         * factory object.
+         * 
+         * @param listPersistenceObject
+         * 
+         * @param factory
+         */
 
         public ReservationListDB(ListPersistenceObject listPersistenceObject, HotelFactory factory) {
                 this.listPersistenceObject = listPersistenceObject;
@@ -56,6 +75,15 @@ public class ReservationListDB implements ReservationDAO {
                 database.add(index, copyReserv);
         }
 
+        /**
+         * Searches for a customer in the customer database according to a given
+         * customer(key).
+         * 
+         * @param key
+         *            a customer
+         * 
+         * @return int mid if the key is found, -(low+1) if it is not found
+         */
         private int binarySearch(Reservation keyReserv) {
                 int low = 0;
                 int high = database.size() - 1;
@@ -105,12 +133,10 @@ public class ReservationListDB implements ReservationDAO {
         public List<Room> getReservedRooms(LocalDate checkin, LocalDate checkout) {
                 List<Room> reservedRooms = new ArrayList<>();
 
-                for (int index = 0; index < this.database.size(); index++) 
-                {
+                for (int index = 0; index < this.database.size(); index++) {
                         if ((this.database.get(index).getCheckInDate().isBefore(checkout))
-                                        && ((this.database.get(index).getCheckOutDate().isAfter(checkin)))) 
-                        {
-                                                reservedRooms.add(this.database.get(index).getRoom());
+                                        && ((this.database.get(index).getCheckOutDate().isAfter(checkin)))) {
+                                reservedRooms.add(this.database.get(index).getRoom());
                         }
                 }
                 Collections.sort(reservedRooms);
@@ -118,12 +144,18 @@ public class ReservationListDB implements ReservationDAO {
                 return reservedRooms;
 
         }
-        
-        private static void removeDuplicates(List<Room> rooms){
-                for (int index=0;index<rooms.size()-1;index++){
-                                if (rooms.get(index).equals(rooms.get(index+1))){
-                                        rooms.remove(index+1);
-                                        index--;
+
+        /**
+         * Removes duplicates from a single list.
+         * 
+         * @param rooms
+         *            the room list to be checked for duplicates
+         */
+        private static void removeDuplicates(List<Room> rooms) {
+                for (int index = 0; index < rooms.size() - 1; index++) {
+                        if (rooms.get(index).equals(rooms.get(index + 1))) {
+                                rooms.remove(index + 1);
+                                index--;
                         }
                 }
         }
@@ -133,18 +165,15 @@ public class ReservationListDB implements ReservationDAO {
 
                 List<Room> reservedRooms = new ArrayList<>();
 
-                for (int index = 0; index < this.database.size(); index++) 
-                {
+                for (int index = 0; index < this.database.size(); index++) {
                         if (!((this.database.get(index).getCheckInDate().isBefore(checkout))
-                                        && ((this.database.get(index).getCheckOutDate().isAfter(checkin))))) 
-                        {
-                                                reservedRooms.add(this.database.get(index).getRoom());
+                                        && ((this.database.get(index).getCheckOutDate().isAfter(checkin))))) {
+                                reservedRooms.add(this.database.get(index).getRoom());
                         }
                 }
                 Collections.sort(reservedRooms);
                 removeDuplicates(reservedRooms);
                 return reservedRooms;
-
 
         }
 
@@ -152,15 +181,13 @@ public class ReservationListDB implements ReservationDAO {
         public List<Room> getFreeRooms(LocalDate checkin, LocalDate checkout, RoomType roomType) {
                 List<Room> reservedRooms = new ArrayList<>();
 
-                for (int index = 0; index < this.database.size(); index++) 
-                {
+                for (int index = 0; index < this.database.size(); index++) {
                         if (!((this.database.get(index).getCheckInDate().isBefore(checkout))
-                                        && ((this.database.get(index).getCheckOutDate().isAfter(checkin))))) 
-                        {
-                                if((this.database.get(index).getRoom().getRoomType()==roomType)){
+                                        && ((this.database.get(index).getCheckOutDate().isAfter(checkin))))) {
+                                if ((this.database.get(index).getRoom().getRoomType() == roomType)) {
                                         reservedRooms.add(this.database.get(index).getRoom());
                                 }
-                                                
+
                         }
                 }
                 Collections.sort(reservedRooms);
