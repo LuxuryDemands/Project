@@ -134,10 +134,7 @@ public class ListUtilities {
 		print.close();
 		}
 		catch(FileNotFoundException e){
-			System.out.println("The specified path does not refer to a file.");
-		}
-		finally{
-			
+			//System.out.println("The specified path does not refer to a file.");
 		}
 		
 	}
@@ -252,44 +249,5 @@ public class ListUtilities {
 			throw new IllegalArgumentException("The list is not full to capacity");
 		}
 		Arrays.sort(list, sortOrder);
-	}
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	public static <E extends Comparable> int binarySearch(List<E> list, E key){
-//		int low = 0;
-//		int high = list.size() - 1;
-//		int mid = low + (high - low) / 2;
-//		while (low <= high) {
-//			
-//			if (list.get(mid).compareTo(key) < 0) {
-//				low = mid + 1;
-//				mid = (low+high)/2;
-//			}
-//			else if (list.get(mid).compareTo(key) > 0) {
-//				high = mid - 1;
-//				mid = (low+high)/2;
-//			}
-//			else if(list.get(mid).compareTo(key)==0){
-//				return -1;
-//			}
-//		}
-//		return mid;
-//	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static <E  extends Comparable> int binarySearch (List <E> c,  E elem2Look4) 
-	{
-		int startIndex = 0;
-		int endIndex = c.size();
-		int midIndex = (startIndex + endIndex)/2;
-		
-		while (startIndex <= endIndex)
-		{
-			if(c.get(midIndex).compareTo(elem2Look4)==0) return midIndex; // found
-			if(c.get(midIndex).compareTo(elem2Look4)>0) endIndex = midIndex -1; // 
-			if(c.get(midIndex).compareTo(elem2Look4)<0) startIndex = midIndex +1; // 
-			
-			midIndex = (startIndex + endIndex)/2;
-		}
-		
-		return -1;
 	}
 }
