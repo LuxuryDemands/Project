@@ -5,15 +5,24 @@ import java.util.Comparator;
 import dw317.hotel.business.interfaces.Reservation;
 
 /**
- * @author kajal
- *
+ * Compares two reservation objects, first by their customers, then by the
+ * default (check in date).
+ * 
+ * @param r1
+ *            A reservation object.
+ * 
+ * @param r2
+ *            A reservation object.
+ * 
+ * @return int 0 if they are equal, 1 if r1 is greater than r2, -1 if r2 is
+ *         greater than r1.
  */
 public class ReservationByCheckOutSorted implements Comparator<Reservation> {
 
 	@Override
 	public int compare(Reservation r1, Reservation r2) {
 		if (r1.getCheckOutDate().equals(r2.getCheckOutDate())) {
-			return 0;
+			return r1.compareTo(r2);
 		}
 		if (r1.getCheckOutDate().isAfter(r2.getCheckOutDate())) {
 			return 1;
