@@ -12,8 +12,6 @@ import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
-
 /**
  * This class compasses ListUtilities like sort and merge and other private
  * methods.
@@ -134,9 +132,8 @@ public class ListUtilities {
 		print.close();
 		}
 		catch(FileNotFoundException e){
-			//System.out.println("The specified path does not refer to a file.");
+			System.out.println("The specified path does not refer to a file.");
 		}
-		
 	}
 
 	/**
