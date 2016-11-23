@@ -142,7 +142,7 @@ public class ReservationListDB implements ReservationDAO {
 		Collections.sort(reservedRooms);
 		removeDuplicates(reservedRooms);
 		return reservedRooms;
-ASDAS
+
 	}
 
 	/**
