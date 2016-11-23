@@ -27,16 +27,12 @@ public class ReservationListDBTest {
 		// //test 4
 		// testGetReservedRooms();
 		// //test 5
-		double startTime = System.nanoTime();
-		testGetFreeRooms();
-		double endTime = System.nanoTime();
-		double duration = (endTime - startTime)/1000000.0; 
-		System.out.println(duration);
+		//testGetFreeRooms();
 		// //test 6
 		//testGetFreeRooms2();
 		// //test 7
 		// testClearAllPast();
-		// testDAP();
+		testDAP();
 	}
 
 	private static void setup() {
@@ -70,7 +66,7 @@ public class ReservationListDBTest {
 		reservs[4] = "chrissytocool404@hitmall.com*2016*2*22*2016*3*17*505";
 		reservs[5] = "G8772375@hotmail.com*2016*9*18*2016*9*19*801";
 		reservs[6] = "d@zzz.com*2016*10*11*2016*11*2*704";
-		reservs[7] = "d@zzz.com*2016*10*12*2016*10*15*101";
+		reservs[7] = "d@zzz.com*2016*10*12*2016*10*15*102";
 
 		File dir = new File("testfiles");
 		try {
@@ -195,7 +191,7 @@ public class ReservationListDBTest {
 				"testfiles/testCustomers.txt", "testfiles/testReservations.txt");
 		ReservationListDB reservDB = new ReservationListDB(file);
 
-		LocalDate checkIn = LocalDate.of(2016, 1, 1);
+		LocalDate checkIn = LocalDate.of(1999, 1, 1);
 		LocalDate checkOut = LocalDate.of(2016, 12, 31);
 		List<Room> rooms = reservDB.getFreeRooms(checkIn, checkOut);
 		System.out.println("start");

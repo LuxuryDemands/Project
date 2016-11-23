@@ -47,9 +47,13 @@ public class DawsonHotelAllocationPolicy implements Serializable, AllocationPoli
 				index--;
 			}
 		}
-		Random randomizer = new Random();
-		Room random = availableRooms.get(randomizer.nextInt(availableRooms.size()));
-		return Optional.ofNullable(random);
+		if (availableRooms.size() == 0) {
+			return Optional.ofNullable(null);
+		} else {
+			Random randomizer = new Random();
+			Room random = availableRooms.get(randomizer.nextInt(availableRooms.size()));
+			return Optional.ofNullable(random);
+		}
 	}
 
 }
