@@ -3,7 +3,9 @@
  */
 package groupLUXURY.hotel.data;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import dw317.hotel.business.interfaces.Customer;
 import dw317.hotel.business.interfaces.Reservation;
@@ -29,43 +31,77 @@ public class ObjectSerializedList implements ListPersistenceObject {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Room> getRoomDatabase() {
-		List<Room> rooms;
+		List<Room> rooms = null;
 			try {
 				rooms = (List<Room>) Utilities.deserializeObject(roomFilename);
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-		
-
+			return rooms;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Customer> getCustomerDatabase() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Customer> cust = null;
+		try {
+			cust = (List<Customer>) Utilities.deserializeObject(customerFilename);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return cust;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Reservation> getReservationDatabase() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reservation> reserv = null;
+		try {
+			reserv = (List<Reservation>) Utilities.deserializeObject(reservationFilename);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return reserv;
 	}
 
 	@Override
 	public void saveCustomerDatabase(List<Customer> custs) throws IOException {
-		// TODO Auto-generated method stub
-		
+		ObjectOutputStream oos = null;
+		FileOutputStream fout = null;
+		try{
+		    fout = new FileOutputStream(this.customerFilename, true);
+		    oos = new ObjectOutputStream(fout);
+		    oos.writeObject(custs);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		} finally {
+		    if(oos  != null){
+		        oos.close();
+		    } 
+		}
 	}
 
 	@Override
 	public void saveReservationDatabase(List<Reservation> reservs) throws IOException {
-		// TODO Auto-generated method stub
-		
+		ObjectOutputStream oos = null;
+		FileOutputStream fout = null;
+		try{
+		    fout = new FileOutputStream(this.reservationFilename, true);
+		    oos = new ObjectOutputStream(fout);
+		    oos.writeObject(reservs);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		} finally {
+		    if(oos  != null){
+		        oos.close();
+		    } 
+		}
 	}
 
 }
